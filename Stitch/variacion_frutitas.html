@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Saludable – Nutricionista Maylin Sic</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&amp;family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#ef7d00",
+            "accent-green": "#76bc21",
+            "accent-red": "#da1c22",
+            "warm-gray": "#5d534a",
+            "background-light": "#fffcf9",
+            "background-dark": "#1a1412",
+          },
+          fontFamily: {
+            "display": ["Fredoka", "sans-serif"],
+            "sans": ["Public Sans", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "lg": "1rem",
+            "xl": "1.5rem",
+            "2xl": "2.5rem",
+            "organic": "30% 70% 70% 30% / 30% 30% 70% 70%",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    body {
+      font-family: "Public Sans", sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    .font-display {
+      font-family: "Fredoka", sans-serif;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .organic-shape-1 {
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+
+    .organic-shape-2 {
+      border-radius: 30% 70% 70% 30% / 50% 60% 40% 50%;
+    }
+
+    .blob-bg {
+      background-image: radial-gradient(circle at 10% 20%, rgba(239, 125, 0, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(118, 188, 33, 0.05) 0%, transparent 40%);
+    }
+
+    /* Fruit background layer */
+    .fruit-bg-item {
+      position: absolute;
+      pointer-events: none;
+      font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 48;
+      line-height: 1;
+    }
+
+    /* Fruit letter effect */
+    .fruta-a {
+      color: #ef7d00;
+    }
+
+    .fruta-u {
+      color: #da1c22;
+    }
+
+    .fruta-b {
+      color: #76bc21;
+    }
+
+    /* Price card featured */
+    .price-featured {
+      background: linear-gradient(160deg, #ef7d00, #c9711a);
+      color: white;
+    }
+
+    /* Schedule rows */
+    .sch-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.55rem 0.9rem;
+      border-radius: 8px;
+      background: #fffcf9;
+      font-size: 0.88rem;
+      margin-bottom: 0.4rem;
+    }
+
+    /* WhatsApp float */
+    .wa-float {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #25D366;
+      color: white;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      box-shadow: 0 4px 16px rgba(37, 211, 102, .4);
+      text-decoration: none;
+      z-index: 200;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .wa-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 24px rgba(37, 211, 102, .5);
+    }
+
+    .product-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card.is-selected {
+      border-color: #ef7d00;
+      box-shadow: 0 18px 40px rgba(239, 125, 0, 0.14);
+      transform: translateY(-4px);
+    }
+
+    .product-card.is-selected::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(239, 125, 0, 0.08), rgba(118, 188, 33, 0.05));
+      pointer-events: none;
+    }
+
+    .product-card:focus-visible {
+      outline: 3px solid rgba(239, 125, 0, 0.3);
+      outline-offset: 4px;
+    }
+
+    .selection-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      min-width: 2rem;
+      height: 2rem;
+      padding: 0 0.55rem;
+      border-radius: 9999px;
+      background: #ef7d00;
+      color: white;
+      font-size: 0.85rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 24px rgba(239, 125, 0, 0.22);
+    }
+
+    .service-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card.is-selected {
+      border-color: #ef7d00;
+      box-shadow: 0 18px 40px rgba(239, 125, 0, 0.14);
+      transform: translateY(-4px);
+    }
+
+    .service-card.is-selected::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(239, 125, 0, 0.08), rgba(118, 188, 33, 0.05));
+      pointer-events: none;
+    }
+
+    .service-card:focus-visible {
+      outline: 3px solid rgba(239, 125, 0, 0.3);
+      outline-offset: 4px;
+    }
+
+    .service-card.price-featured.is-selected::after {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .order-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-radius: 9999px;
+      background: rgba(239, 125, 0, 0.08);
+      color: #5d534a;
+      padding: 0.6rem 0.9rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .order-chip button {
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 9999px;
+      border: none;
+      background: white;
+      color: #ef7d00;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .order-chip button:hover {
+      background: #ef7d00;
+      color: white;
+    }
+  </style>
+</head>
+
+<body
+  class="bg-background-light dark:bg-background-dark text-warm-gray dark:text-slate-200 antialiased transition-colors duration-300 blob-bg">
+  <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+
+    <!-- Fruit background decorations -->
+    <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;">
+      <!-- Top area (0–15%) -->
+      <span class="material-symbols-outlined fruit-bg-item" style="top:2%;left:1.5%;font-size:80px;color:#ef7d00;opacity:0.10;transform:rotate(-15deg)">nutrition</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:5%;right:3%;font-size:60px;color:#76bc21;opacity:0.10;transform:rotate(20deg)">eco</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:1%;left:42%;font-size:52px;color:#da1c22;opacity:0.08;transform:rotate(8deg)">spa</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:8%;left:22%;font-size:44px;color:#9c4fd6;opacity:0.09;transform:rotate(-30deg)">local_florist</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:10%;right:20%;font-size:48px;color:#2bb5a0;opacity:0.09;transform:rotate(15deg)">yard</span>
+
+      <!-- 18–32% -->
+      <span class="material-symbols-outlined fruit-bg-item" style="top:20%;left:5%;font-size:68px;color:#76bc21;opacity:0.10;transform:rotate(10deg)">eco</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:23%;right:5%;font-size:76px;color:#ef7d00;opacity:0.08;transform:rotate(-12deg)">nutrition</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:28%;left:55%;font-size:54px;color:#da1c22;opacity:0.09;transform:rotate(25deg)">nutrition</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:18%;left:33%;font-size:46px;color:#f5c842;opacity:0.10;transform:rotate(-20deg)">spa</span>
+
+      <!-- 35–50% -->
+      <span class="material-symbols-outlined fruit-bg-item" style="top:38%;left:2%;font-size:72px;color:#da1c22;opacity:0.09;transform:rotate(-8deg)">nutrition</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:42%;right:2%;font-size:62px;color:#76bc21;opacity:0.10;transform:rotate(18deg)">yard</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:46%;left:38%;font-size:50px;color:#9c4fd6;opacity:0.09;transform:rotate(-28deg)">local_florist</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:35%;left:18%;font-size:44px;color:#2bb5a0;opacity:0.09;transform:rotate(35deg)">eco</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:50%;right:18%;font-size:58px;color:#ef7d00;opacity:0.08;transform:rotate(-5deg)">spa</span>
+
+      <!-- 55–70% -->
+      <span class="material-symbols-outlined fruit-bg-item" style="top:58%;left:6%;font-size:70px;color:#ef7d00;opacity:0.10;transform:rotate(12deg)">eco</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:62%;right:7%;font-size:66px;color:#da1c22;opacity:0.09;transform:rotate(-22deg)">nutrition</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:66%;left:48%;font-size:48px;color:#f5c842;opacity:0.10;transform:rotate(30deg)">spa</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:55%;left:28%;font-size:52px;color:#76bc21;opacity:0.09;transform:rotate(-15deg)">yard</span>
+
+      <!-- 72–85% -->
+      <span class="material-symbols-outlined fruit-bg-item" style="top:74%;left:3%;font-size:64px;color:#9c4fd6;opacity:0.10;transform:rotate(-10deg)">local_florist</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:78%;right:4%;font-size:74px;color:#76bc21;opacity:0.08;transform:rotate(16deg)">eco</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:82%;left:44%;font-size:56px;color:#ef7d00;opacity:0.10;transform:rotate(-25deg)">nutrition</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:72%;left:20%;font-size:46px;color:#2bb5a0;opacity:0.09;transform:rotate(22deg)">eco</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:80%;right:22%;font-size:50px;color:#da1c22;opacity:0.09;transform:rotate(-18deg)">spa</span>
+
+      <!-- Bottom 88–98% -->
+      <span class="material-symbols-outlined fruit-bg-item" style="top:90%;left:8%;font-size:70px;color:#76bc21;opacity:0.10;transform:rotate(8deg)">eco</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:93%;right:10%;font-size:60px;color:#ef7d00;opacity:0.10;transform:rotate(-14deg)">nutrition</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:88%;left:35%;font-size:54px;color:#f5c842;opacity:0.09;transform:rotate(28deg)">yard</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:96%;right:32%;font-size:48px;color:#9c4fd6;opacity:0.09;transform:rotate(-20deg)">local_florist</span>
+
+      <!-- Extra scattered fillers -->
+      <span class="material-symbols-outlined fruit-bg-item" style="top:14%;left:60%;font-size:42px;color:#ef7d00;opacity:0.08;transform:rotate(-8deg)">nutrition</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:31%;right:28%;font-size:50px;color:#2bb5a0;opacity:0.09;transform:rotate(12deg)">eco</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:44%;left:70%;font-size:56px;color:#da1c22;opacity:0.08;transform:rotate(-35deg)">spa</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:61%;right:35%;font-size:44px;color:#9c4fd6;opacity:0.09;transform:rotate(18deg)">local_florist</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:69%;left:14%;font-size:48px;color:#f5c842;opacity:0.09;transform:rotate(-22deg)">yard</span>
+      <span class="material-symbols-outlined fruit-bg-item" style="top:84%;left:60%;font-size:52px;color:#76bc21;opacity:0.09;transform:rotate(30deg)">nutrition</span>
+    </div>
+
+    <!-- Top Navigation -->
+    <header
+      class="sticky top-0 z-50 w-full border-b border-orange-100 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
+      <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
+        <div class="flex items-center gap-3">
+          <img alt="Saludable Logo" class="h-10 w-auto" src="image.png" />
+          <span
+            class="hidden md:block text-xs font-bold text-warm-gray/50 border-l-2 border-orange-100 pl-3 uppercase tracking-widest">no
+            es dieta, es estilo de vida</span>
+        </div>
+        <nav class="hidden md:flex items-center gap-6">
+          <a class="text-sm font-bold hover:text-primary transition-colors" href="#servicios">Servicios</a>
+          <a class="text-sm font-bold hover:text-primary transition-colors" href="#consulta">Consulta</a>
+          <a class="text-sm font-bold hover:text-primary transition-colors" href="#precios">Precios</a>
+          <a class="text-sm font-bold hover:text-primary transition-colors" href="#horarios">Disponibilidad</a>
+          <a class="text-sm font-bold hover:text-primary transition-colors" href="#productos">Productos</a>
+          <a class="text-sm font-bold hover:text-primary transition-colors" href="#sobre-mi">Sobre mí</a>
+          <a class="text-sm font-bold hover:text-primary transition-colors" href="#contacto">Contacto</a>
+        </nav>
+        <a href="#contacto"
+          class="rounded-full bg-primary px-6 py-2.5 text-sm font-bold text-white shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
+          Programar Cita
+        </a>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative py-12 md:py-20" id="inicio">
+      <div class="absolute top-10 left-10 text-accent-red opacity-20 animate-bounce">
+        <span class="material-symbols-outlined text-4xl">nutrition</span>
+      </div>
+      <div class="absolute bottom-20 right-10 text-accent-green opacity-20 rotate-12">
+        <span class="material-symbols-outlined text-5xl">eco</span>
+      </div>
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+          <div class="flex flex-col gap-6">
+            <div
+              class="inline-flex items-center gap-2 rounded-full bg-accent-green/10 px-5 py-2 text-accent-green w-fit">
+              <span class="material-symbols-outlined text-sm">energy_savings_leaf</span>
+              <span class="text-xs font-bold uppercase tracking-widest">Nutrición personalizada · Guatemala</span>
+            </div>
+            <h1 class="text-5xl font-bold leading-[1.1] text-warm-gray dark:text-white md:text-7xl">
+              Tu bienestar <span class="text-primary">comienza</span> en el plato
+            </h1>
+            <p class="max-w-xl text-lg leading-relaxed text-warm-gray/80 dark:text-slate-400 font-medium">
+              Acompañamiento nutricional profesional para mamás, bebés, niños, adolescentes y familias completas. Planes
+              adaptados a tu vida real.
+            </p>
+            <div class="flex flex-col gap-4 sm:flex-row pt-4">
+              <a href="#contacto"
+                class="flex h-14 items-center justify-center rounded-2xl bg-accent-red px-10 text-lg font-bold text-white shadow-xl shadow-accent-red/20 hover:bg-accent-red/90 transition-all hover:scale-[1.02]">
+                Programar mi consulta
+              </a>
+              <a href="#servicios"
+                class="flex h-14 items-center justify-center rounded-2xl border-2 border-primary/20 dark:border-slate-800 px-10 text-lg font-bold text-primary hover:bg-primary/5 transition-all">
+                Ver servicios
+              </a>
+            </div>
+            <div class="flex items-center gap-4 pt-4">
+              <div class="flex -space-x-3">
+                <div
+                  class="h-12 w-12 rounded-full border-4 border-white bg-orange-100 shadow-sm overflow-hidden flex items-center justify-center text-xl">
+                  🤰</div>
+                <div
+                  class="h-12 w-12 rounded-full border-4 border-white bg-green-100 shadow-sm overflow-hidden flex items-center justify-center text-xl">
+                  👶</div>
+                <div
+                  class="h-12 w-12 rounded-full border-4 border-white bg-red-100 shadow-sm overflow-hidden flex items-center justify-center text-xl">
+                  🏠</div>
+              </div>
+              <p class="text-sm font-bold text-warm-gray/60">Familias guatemaltecas transformando su vida</p>
+            </div>
+          </div>
+          <div class="relative flex items-center justify-center">
+            <!-- Decorative blobs -->
+            <div class="absolute -top-16 -right-16 h-72 w-72 organic-shape-2 bg-accent-green/25 -z-0"></div>
+            <div class="absolute -bottom-16 -left-8 h-56 w-56 organic-shape-1 bg-primary/15 -z-0"></div>
+            <!-- Plate image -->
+            <img src="Saludableplato.png" alt="Plato saludable" class="relative z-10 w-full"
+              style="border-radius:50%;box-shadow:0 24px 64px rgba(0,0,0,0.14);" />
+            <!-- Floating card -->
+            <div
+              class="absolute -bottom-4 -left-4 flex items-center gap-4 rounded-3xl bg-white dark:bg-slate-900 p-5 shadow-2xl z-20 border border-orange-50">
+              <div class="h-14 w-14 rounded-2xl overflow-hidden shadow-lg shadow-accent-green/20">
+                <img src="Meylin.jpeg" alt="Maylin Sic"
+                  style="width:100%;height:100%;object-fit:cover;object-position:center top;" />
+              </div>
+              <div>
+                <p class="text-sm font-bold text-warm-gray dark:text-white">Maylin Sic</p>
+                <p class="text-xs font-bold text-accent-green uppercase tracking-tighter">Colegiada activa 5165</p>
+                <div class="flex gap-3 mt-1">
+                  <span class="text-xs font-bold text-warm-gray/60">Q350 <span class="font-normal">1ª
+                      consulta</span></span>
+                  <span class="text-xs font-bold text-warm-gray/60">6 <span class="font-normal">servicios</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="bg-orange-50/30 dark:bg-slate-900/50 py-24 relative overflow-hidden" id="servicios">
+      <div class="absolute top-0 right-0 p-12 text-primary/10">
+        <span class="material-symbols-outlined text-[120px] rotate-45">nutrition</span>
+      </div>
+      <div class="mx-auto max-w-7xl px-6 relative z-10">
+        <div class="mb-16 text-center">
+          <h2 class="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-accent-red">Cuidado Integral</h2>
+          <h3 class="text-4xl font-bold text-warm-gray dark:text-white md:text-5xl">¿En qué puedo acompañarte?</h3>
+        </div>
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+
+          <!-- Servicio 1 -->
+          <div
+            class="group rounded-3xl bg-white dark:bg-slate-800 p-8 transition-all hover:-translate-y-2 hover:shadow-2xl border-b-8 border-primary/20">
+            <div
+              class="mb-6 flex h-18 w-18 h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary organic-shape-1 group-hover:bg-primary group-hover:text-white transition-colors text-3xl">
+              🤰
+            </div>
+            <h4 class="mb-3 text-xl font-bold">Nutrición Mamá y Bebé</h4>
+            <p class="mb-6 text-warm-gray/70 dark:text-slate-400 font-medium text-sm leading-relaxed">Acompañamiento
+              durante el embarazo y posparto. Planes personalizados por etapa para prevenir diabetes gestacional y otras
+              complicaciones.</p>
+            <a class="inline-flex items-center font-bold text-primary gap-2 group-hover:gap-4 transition-all text-sm"
+              href="#contacto">
+              Enviar mensaje <span class="material-symbols-outlined text-base">arrow_right_alt</span>
+            </a>
+          </div>
+
+          <!-- Servicio 2 -->
+          <div
+            class="group rounded-3xl bg-white dark:bg-slate-800 p-8 transition-all hover:-translate-y-2 hover:shadow-2xl border-b-8 border-accent-red/20">
+            <div
+              class="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-accent-red/10 text-accent-red organic-shape-2 group-hover:bg-accent-red group-hover:text-white transition-colors text-3xl">
+              🤱
+            </div>
+            <h4 class="mb-3 text-xl font-bold">Lactancia Materna</h4>
+            <p class="mb-6 text-warm-gray/70 dark:text-slate-400 font-medium text-sm leading-relaxed">Asesoría
+              especializada para iniciar, mantener o mejorar la lactancia. Resolución de dudas con base científica y
+              mucho cariño.</p>
+            <a class="inline-flex items-center font-bold text-accent-red gap-2 group-hover:gap-4 transition-all text-sm"
+              href="#contacto">
+              Enviar mensaje <span class="material-symbols-outlined text-base">arrow_right_alt</span>
+            </a>
+          </div>
+
+          <!-- Servicio 3 -->
+          <div
+            class="group rounded-3xl bg-white dark:bg-slate-800 p-8 transition-all hover:-translate-y-2 hover:shadow-2xl border-b-8 border-accent-green/20">
+            <div
+              class="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-accent-green/10 text-accent-green organic-shape-1 group-hover:bg-accent-green group-hover:text-white transition-colors text-3xl">
+              🥣
+            </div>
+            <h4 class="mb-3 text-xl font-bold">Alimentación Complementaria</h4>
+            <p class="mb-6 text-warm-gray/70 dark:text-slate-400 font-medium text-sm leading-relaxed">Guía para
+              introducir alimentos sólidos de forma segura, respetando el ritmo del bebé y promoviendo hábitos
+              saludables desde el inicio.</p>
+            <a class="inline-flex items-center font-bold text-accent-green gap-2 group-hover:gap-4 transition-all text-sm"
+              href="#contacto">
+              Enviar mensaje <span class="material-symbols-outlined text-base">arrow_right_alt</span>
+            </a>
+          </div>
+
+          <!-- Servicio 4 -->
+          <div
+            class="group rounded-3xl bg-white dark:bg-slate-800 p-8 transition-all hover:-translate-y-2 hover:shadow-2xl border-b-8 border-primary/20">
+            <div
+              class="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary organic-shape-2 group-hover:bg-primary group-hover:text-white transition-colors text-3xl">
+              💛
+            </div>
+            <h4 class="mb-3 text-xl font-bold">Destete Respetuoso</h4>
+            <p class="mb-6 text-warm-gray/70 dark:text-slate-400 font-medium text-sm leading-relaxed">Acompañamiento en
+              el proceso de destete de manera gradual, amorosa y respetuosa, cuidando el vínculo y el bienestar de mamá
+              y bebé.</p>
+            <a class="inline-flex items-center font-bold text-primary gap-2 group-hover:gap-4 transition-all text-sm"
+              href="#contacto">
+              Enviar mensaje <span class="material-symbols-outlined text-base">arrow_right_alt</span>
+            </a>
+          </div>
+
+          <!-- Servicio 5 -->
+          <div
+            class="group rounded-3xl bg-white dark:bg-slate-800 p-8 transition-all hover:-translate-y-2 hover:shadow-2xl border-b-8 border-accent-red/20">
+            <div
+              class="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-accent-red/10 text-accent-red organic-shape-1 group-hover:bg-accent-red group-hover:text-white transition-colors text-3xl">
+              🌱
+            </div>
+            <h4 class="mb-3 text-xl font-bold">Niños y Adolescentes</h4>
+            <p class="mb-6 text-warm-gray/70 dark:text-slate-400 font-medium text-sm leading-relaxed">Evaluación y
+              orientación nutricional para apoyar el crecimiento y la formación de hábitos saludables en cada etapa de
+              la infancia.</p>
+            <a class="inline-flex items-center font-bold text-accent-red gap-2 group-hover:gap-4 transition-all text-sm"
+              href="#contacto">
+              Enviar mensaje <span class="material-symbols-outlined text-base">arrow_right_alt</span>
+            </a>
+          </div>
+
+          <!-- Servicio 6 -->
+          <div
+            class="group rounded-3xl bg-white dark:bg-slate-800 p-8 transition-all hover:-translate-y-2 hover:shadow-2xl border-b-8 border-accent-green/20">
+            <div
+              class="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-accent-green/10 text-accent-green organic-shape-2 group-hover:bg-accent-green group-hover:text-white transition-colors text-3xl">
+              🏠
+            </div>
+            <h4 class="mb-3 text-xl font-bold">Alimentación Familiar</h4>
+            <p class="mb-6 text-warm-gray/70 dark:text-slate-400 font-medium text-sm leading-relaxed">Estrategias
+              prácticas para mejorar la alimentación de toda la familia, con menús equilibrados y hábitos sostenibles en
+              el hogar.</p>
+            <a class="inline-flex items-center font-bold text-accent-green gap-2 group-hover:gap-4 transition-all text-sm"
+              href="#contacto">
+              Enviar mensaje <span class="material-symbols-outlined text-base">arrow_right_alt</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Consulta – Qué incluye -->
+    <section class="py-24 overflow-hidden" id="consulta">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="flex flex-col items-center gap-16 lg:flex-row">
+          <div class="w-full lg:w-1/2">
+            <h2 class="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-primary">Tu consulta nutricional</h2>
+            <h3 class="mb-8 text-4xl font-bold text-warm-gray dark:text-white md:text-5xl">Todo lo que incluye tu cita
+            </h3>
+            <ul class="space-y-4">
+              <li
+                class="flex items-center gap-4 bg-white dark:bg-slate-800 p-4 rounded-2xl border border-orange-50 shadow-sm">
+                <span
+                  class="material-symbols-outlined text-accent-green bg-accent-green/10 p-2 rounded-full font-bold">check</span>
+                <span class="font-bold">Evaluación dietética completa</span>
+              </li>
+              <li
+                class="flex items-center gap-4 bg-white dark:bg-slate-800 p-4 rounded-2xl border border-orange-50 shadow-sm">
+                <span
+                  class="material-symbols-outlined text-accent-green bg-accent-green/10 p-2 rounded-full font-bold">check</span>
+                <span class="font-bold">Evaluación antropométrica (composición corporal)</span>
+              </li>
+              <li
+                class="flex items-center gap-4 bg-white dark:bg-slate-800 p-4 rounded-2xl border border-orange-50 shadow-sm">
+                <span
+                  class="material-symbols-outlined text-accent-green bg-accent-green/10 p-2 rounded-full font-bold">check</span>
+                <span class="font-bold">Diagnóstico nutricional personalizado</span>
+              </li>
+              <li
+                class="flex items-center gap-4 bg-white dark:bg-slate-800 p-4 rounded-2xl border border-orange-50 shadow-sm">
+                <span
+                  class="material-symbols-outlined text-accent-green bg-accent-green/10 p-2 rounded-full font-bold">check</span>
+                <span class="font-bold">Plan de alimentación a tu medida</span>
+              </li>
+              <li
+                class="flex items-center gap-4 bg-white dark:bg-slate-800 p-4 rounded-2xl border border-orange-50 shadow-sm">
+                <span
+                  class="material-symbols-outlined text-accent-green bg-accent-green/10 p-2 rounded-full font-bold">check</span>
+                <span class="font-bold">Lista de productos recomendados por marca</span>
+              </li>
+              <li
+                class="flex items-center gap-4 bg-white dark:bg-slate-800 p-4 rounded-2xl border border-orange-50 shadow-sm">
+                <span
+                  class="material-symbols-outlined text-accent-green bg-accent-green/10 p-2 rounded-full font-bold">check</span>
+                <span class="font-bold">Recetas complementarias</span>
+              </li>
+            </ul>
+          </div>
+          <div class="w-full lg:w-1/2">
+            <div class="rounded-3xl p-10 text-white text-center shadow-2xl"
+              style="background: linear-gradient(160deg, #ef7d00 0%, #da1c22 100%);">
+              <img src="Saludable2.png" alt="Plato saludable"
+                style="width:160px;height:160px;object-fit:cover;border-radius:50%;border:4px solid rgba(255,255,255,0.35);box-shadow:0 8px 32px rgba(0,0,0,0.25);margin:0 auto 1.5rem;display:block;" />
+              <h3 class="text-3xl font-bold mb-4">Un plan diseñado solo para ti</h3>
+              <p class="opacity-90 text-lg mb-8 leading-relaxed">Cada consulta es única. Analizo tus hábitos, tu cuerpo
+                y tu estilo de vida para darte un plan real y sostenible.</p>
+              <a href="#contacto"
+                class="inline-block bg-white text-primary font-bold px-8 py-3 rounded-full shadow-lg hover:scale-105 transition-transform">
+                Quiero mi consulta →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="bg-orange-50/30 dark:bg-slate-900/50 py-24 overflow-hidden" id="sobre-mi">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="flex flex-col items-center gap-20 lg:flex-row">
+          <div class="relative w-full lg:w-1/2">
+            <div class="organic-shape-2 aspect-[4/5] w-full overflow-hidden shadow-xl">
+              <img src="Mey2.png" alt="Maylin Sic"
+                style="width:100%;height:100%;object-fit:cover;object-position:65% 10%;" />
+            </div>
+            <div class="absolute -right-6 bottom-12">
+              <div class="bg-primary p-8 organic-shape-1 text-white shadow-2xl text-center">
+                <p class="text-3xl font-bold">5165</p>
+                <p class="text-xs font-bold uppercase tracking-widest opacity-90">Colegiada<br />Activa</p>
+              </div>
+            </div>
+          </div>
+          <div class="w-full lg:w-1/2">
+            <h2 class="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-primary">Conoce a Maylin</h2>
+            <h3 class="mb-8 text-4xl font-bold text-warm-gray dark:text-white md:text-5xl">Especialista y Mamá</h3>
+            <div class="space-y-6 text-lg text-warm-gray/80 dark:text-slate-400 font-medium">
+              <p>Entiendo los miedos y alegrías de alimentar a un bebé porque lo vivo cada día. Mi enfoque no es darte
+                una lista de prohibidos, sino enseñarte un <span class="text-accent-green font-bold">estilo de
+                  vida saludable</span>.</p>
+              <p>Combinamos ciencia actualizada con empatía real. Sin presiones, a vuestro ritmo. Porque no es una dieta
+                — es una forma de vivir.</p>
+              <ul class="space-y-4 pt-4">
+                <li class="flex items-center gap-4">
+                  <span
+                    class="material-symbols-outlined text-accent-green bg-accent-green/10 p-2 rounded-full font-bold">check</span>
+                  <span class="font-bold">Nutricionista Certificada – Colegiado activo 5165</span>
+                </li>
+                <li class="flex items-center gap-4">
+                  <span
+                    class="material-symbols-outlined text-accent-green bg-accent-green/10 p-2 rounded-full font-bold">check</span>
+                  <span class="font-bold">Especialista en Lactancia Materna</span>
+                </li>
+                <li class="flex items-center gap-4">
+                  <span
+                    class="material-symbols-outlined text-accent-green bg-accent-green/10 p-2 rounded-full font-bold">check</span>
+                  <span class="font-bold">Especialista en Alimentación Complementaria</span>
+                </li>
+                <li class="flex items-center gap-4">
+                  <span
+                    class="material-symbols-outlined text-accent-green bg-accent-green/10 p-2 rounded-full font-bold">check</span>
+                  <span class="font-bold">Atención presencial, virtual y a domicilio</span>
+                </li>
+              </ul>
+              <div class="pt-8">
+                <a href="#contacto"
+                  class="inline-block rounded-2xl bg-warm-gray dark:bg-white dark:text-warm-gray px-10 py-4 font-bold text-white transition-all hover:bg-primary dark:hover:bg-primary dark:hover:text-white shadow-lg">
+                  Programar con Maylin
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Precios -->
+    <section class="py-24" id="precios">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="mb-16 text-center">
+          <h2 class="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-accent-red">Inversión en tu salud</h2>
+          <h3 class="text-4xl font-bold text-warm-gray dark:text-white md:text-5xl">Tarifas claras y accesibles</h3>
+          <p class="mt-4 text-warm-gray/60 max-w-2xl mx-auto">Haz clic en una o varias tarifas para agregarlas al
+            mensaje. Cada clic suma 1 cita y el texto se actualiza automáticamente en español.</p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3 mb-10">
+          <!-- Primera consulta -->
+          <button
+            class="service-card w-full cursor-pointer rounded-3xl p-8 text-center shadow-2xl price-featured border-2 border-transparent transition-all"
+            data-service-name="Primera consulta" data-service-price="350" type="button">
+            <div class="text-4xl mb-4">⭐</div>
+            <h4 class="text-sm font-bold uppercase tracking-widest opacity-90 mb-2">Primera Consulta</h4>
+            <div class="text-5xl font-bold mb-1">Q350</div>
+            <p class="text-sm opacity-80 mb-4">Evaluación completa incluida</p>
+            <p class="text-sm opacity-75 leading-relaxed">Ideal para empezar. Incluye toda la evaluación y tu primer
+              plan personalizado.</p>
+          </button>
+
+          <!-- Reconsulta -->
+          <button
+            class="service-card w-full cursor-pointer rounded-3xl bg-white dark:bg-slate-800 p-8 text-center border-2 border-orange-100 dark:border-slate-700 hover:border-primary transition-colors hover:shadow-xl"
+            data-service-name="Reconsulta" data-service-price="300" type="button">
+            <div class="text-4xl mb-4">🔄</div>
+            <h4 class="text-sm font-bold uppercase tracking-widest text-warm-gray/60 mb-2">Reconsulta</h4>
+            <div class="text-5xl font-bold text-warm-gray dark:text-white mb-1">Q300</div>
+            <p class="text-sm text-warm-gray/60 mb-4">Seguimiento y ajustes</p>
+            <p class="text-sm text-warm-gray/60 leading-relaxed">Revisamos tu progreso y ajustamos el plan según tus
+              avances.</p>
+          </button>
+
+          <!-- Lactancia -->
+          <button
+            class="service-card w-full cursor-pointer rounded-3xl bg-white dark:bg-slate-800 p-8 text-center border-2 border-orange-100 dark:border-slate-700 hover:border-accent-red transition-colors hover:shadow-xl"
+            data-service-name="Lactancia pre/post parto (2 consultas)" data-service-price="550" type="button">
+            <div class="text-4xl mb-4">🤱</div>
+            <h4 class="text-sm font-bold uppercase tracking-widest text-warm-gray/60 mb-2">Lactancia Pre/Post Parto</h4>
+            <div class="text-5xl font-bold text-warm-gray dark:text-white mb-1">Q550</div>
+            <p class="text-sm text-warm-gray/60 mb-4">Incluye 2 consultas</p>
+            <p class="text-sm text-warm-gray/60 leading-relaxed">Dos consultas completas enfocadas en apoyo de lactancia
+              materna.</p>
+          </button>
+        </div>
+
+        <!-- Tabla familiar -->
+        <div
+          class="rounded-3xl bg-white dark:bg-slate-800 border border-orange-100 dark:border-slate-700 overflow-hidden shadow-lg">
+          <div class="bg-orange-50/50 dark:bg-slate-700 px-8 py-5 border-b border-orange-100 dark:border-slate-600">
+            <h4 class="text-xl font-bold text-warm-gray dark:text-white">🏠 Consultas Familiares</h4>
+          </div>
+          <div class="divide-y divide-orange-50 dark:divide-slate-700">
+            <button
+              class="service-card flex w-full items-center justify-between px-8 py-4 text-left hover:bg-orange-50/30 transition-colors"
+              data-service-name="Consulta familiar: 2 adultos + 2–3 niños" data-service-price="600" type="button">
+              <span class="font-medium">2 adultos + 2–3 niños</span>
+              <span class="text-xl font-bold text-primary">Q600</span>
+            </button>
+            <button
+              class="service-card flex w-full items-center justify-between px-8 py-4 text-left hover:bg-orange-50/30 transition-colors"
+              data-service-name="Consulta familiar: 2 adultos + 1 niño" data-service-price="500" type="button">
+              <span class="font-medium">2 adultos + 1 niño</span>
+              <span class="text-xl font-bold text-primary">Q500</span>
+            </button>
+            <button
+              class="service-card flex w-full items-center justify-between px-8 py-4 text-left hover:bg-orange-50/30 transition-colors"
+              data-service-name="Consulta familiar: 1 adulto + 2–3 niños" data-service-price="400" type="button">
+              <span class="font-medium">1 adulto + 2–3 niños</span>
+              <span class="text-xl font-bold text-primary">Q400</span>
+            </button>
+          </div>
+        </div>
+        <div class="mt-10 rounded-[2rem] border border-orange-100 bg-white/90 p-8 shadow-xl shadow-orange-100/40">
+          <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+            <div class="max-w-2xl">
+              <p class="text-sm font-bold uppercase tracking-[0.25em] text-accent-red">Tus tarifas</p>
+              <h4 class="mt-2 text-2xl font-bold text-warm-gray">Resumen automático</h4>
+              <p class="mt-2 text-sm font-medium text-warm-gray/60">Puedes sumar varias citas de la misma opción
+                haciendo clic otra vez. Usa los botones del resumen para ajustar cantidades.</p>
+            </div>
+            <button
+              class="rounded-full border border-orange-200 px-5 py-2 text-sm font-bold text-warm-gray transition-colors hover:border-primary hover:text-primary"
+              id="clear-service-button" type="button">
+              Limpiar tarifas
+            </button>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-3" id="service-summary">
+            <span class="text-sm font-medium text-warm-gray/50">Todavía no has agregado tarifas.</span>
+          </div>
+          <div class="mt-6 grid gap-4 md:grid-cols-[1fr_auto] md:items-end">
+            <div class="rounded-2xl bg-orange-50/60 p-5">
+              <p class="text-xs font-bold uppercase tracking-[0.2em] text-primary">Mensaje actual</p>
+              <p class="mt-3 whitespace-pre-line text-sm font-medium text-warm-gray/80" id="pricing-message-preview">
+                Selecciona productos o tarifas para generar el mensaje automáticamente.</p>
+            </div>
+            <div class="rounded-2xl bg-primary/10 p-5 text-sm font-bold text-warm-gray">
+              <p>Total estimado</p>
+              <p class="mt-2 text-3xl text-primary" id="service-total">Q0</p>
+            </div>
+          </div>
+        </div>
+        <p class="mt-6 text-center text-sm text-warm-gray/60">
+          💳 <strong>Formas de pago:</strong> Efectivo o transferencia bancaria.
+        </p>
+      </div>
+    </section>
+
+    <!-- Calendario de Disponibilidad -->
+    <section class="bg-orange-50/30 dark:bg-slate-900/50 py-24" id="horarios">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="mb-16 text-center">
+          <h2 class="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-accent-green">Disponibilidad</h2>
+          <h3 class="text-4xl font-bold text-warm-gray dark:text-white md:text-5xl">Programa tu consulta</h3>
+          <p class="mt-4 text-warm-gray/60 max-w-lg mx-auto">Consulta los días y horarios disponibles para agendar tu cita presencial o virtual.</p>
+        </div>
+
+        <!-- Calendario semanal generado por JS -->
+        <div id="calendario-container" class="mb-10"></div>
+
+        <!-- Leyenda -->
+        <div class="flex flex-wrap justify-center gap-6 mb-10">
+          <div class="flex items-center gap-2">
+            <span class="inline-block w-4 h-4 rounded-full bg-emerald-500"></span>
+            <span class="text-sm font-bold text-warm-gray/70">🏥 Presencial – Clínica Zona 11</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="inline-block w-4 h-4 rounded-full bg-sky-500"></span>
+            <span class="text-sm font-bold text-warm-gray/70">💻 Virtual – Desde cualquier lugar</span>
+          </div>
+        </div>
+
+        <!-- Modalidades -->
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <div
+            class="rounded-2xl bg-white dark:bg-slate-800 p-6 border border-orange-100 dark:border-slate-700 flex items-start gap-4 shadow-sm">
+            <span class="text-3xl">💻</span>
+            <div>
+              <h4 class="font-bold text-warm-gray dark:text-white mb-1">Virtual</h4>
+              <p class="text-sm text-warm-gray/60">Videollamada desde la comodidad de tu hogar.</p>
+            </div>
+          </div>
+          <div
+            class="rounded-2xl bg-white dark:bg-slate-800 p-6 border border-orange-100 dark:border-slate-700 flex items-start gap-4 shadow-sm">
+            <span class="text-3xl">🏥</span>
+            <div>
+              <h4 class="font-bold text-warm-gray dark:text-white mb-1">Clínica Zona 11</h4>
+              <p class="text-sm text-warm-gray/60">Atención presencial en Ciudad de Guatemala.</p>
+            </div>
+          </div>
+          <div
+            class="rounded-2xl bg-white dark:bg-slate-800 p-6 border border-orange-100 dark:border-slate-700 flex items-start gap-4 shadow-sm">
+            <span class="text-3xl">🚗</span>
+            <div>
+              <h4 class="font-bold text-warm-gray dark:text-white mb-1">A Domicilio</h4>
+              <p class="text-sm text-warm-gray/60">Casa u hospital. Consultar cobertura disponible.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+    // ╔══════════════════════════════════════════════════════════════╗
+    // ║  HORARIOS — Edita aquí para actualizar el calendario       ║
+    // ║                                                            ║
+    // ║  Cada entrada tiene:                                       ║
+    // ║    dia:   "Lunes" | "Martes" | ... | "Sábado"              ║
+    // ║    tipo:  "presencial" o "virtual"                         ║
+    // ║    horas: lista de horas, ej. ["18:00", "19:00"]           ║
+    // ║                                                            ║
+    // ║  Para agregar un horario: copia una línea y cambia valores ║
+    // ║  Para quitar un horario: borra la línea                    ║
+    // ╚══════════════════════════════════════════════════════════════╝
+    const HORARIOS = [
+      { dia: "Lunes",     tipo: "presencial", horas: ["18:00", "19:00"] },
+      { dia: "Martes",    tipo: "virtual",    horas: ["17:30"] },
+      { dia: "Miércoles", tipo: "presencial", horas: ["18:00", "19:00"] },
+      { dia: "Jueves",    tipo: "virtual",    horas: ["17:30"] },
+      { dia: "Sábado",    tipo: "presencial", horas: ["7:00", "8:00", "11:00", "12:00"] },
+      { dia: "Sábado",    tipo: "virtual",    horas: ["16:00", "17:00"] },
+    ];
+    // ═══════════════ Fin de configuración ════════════════════════
+
+    (function renderCalendario() {
+      var DIAS = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+      var container = document.getElementById("calendario-container");
+
+      var grid = document.createElement("div");
+      grid.className = "grid grid-cols-3 md:grid-cols-6 gap-3";
+
+      DIAS.forEach(function (dia) {
+        var slots = HORARIOS.filter(function (h) { return h.dia === dia; });
+        var col = document.createElement("div");
+        col.className = "rounded-2xl bg-white dark:bg-slate-800 border border-orange-100 dark:border-slate-700 overflow-hidden shadow-sm";
+
+        var header = document.createElement("div");
+        header.className = "px-4 py-3 text-center font-bold text-sm text-warm-gray dark:text-white bg-orange-50/50 dark:bg-slate-700 border-b border-orange-100 dark:border-slate-600";
+        header.textContent = dia;
+        col.appendChild(header);
+
+        var body = document.createElement("div");
+        body.className = "p-3 flex flex-col gap-2 min-h-[120px]";
+
+        if (!slots.length) {
+          var empty = document.createElement("span");
+          empty.className = "text-xs text-warm-gray/30 text-center mt-4";
+          empty.textContent = "Sin horario";
+          body.appendChild(empty);
+        } else {
+          slots.forEach(function (slot) {
+            slot.horas.forEach(function (hora) {
+              var pill = document.createElement("div");
+              var isPresencial = slot.tipo === "presencial";
+              pill.className = "rounded-lg px-3 py-2 text-center text-xs font-bold transition-transform hover:scale-105 " +
+                (isPresencial
+                  ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
+                  : "bg-sky-50 text-sky-700 dark:bg-sky-900/30 dark:text-sky-300 border border-sky-200 dark:border-sky-800");
+              pill.innerHTML = (isPresencial ? "🏥 " : "💻 ") + hora;
+              body.appendChild(pill);
+            });
+          });
+        }
+
+        col.appendChild(body);
+        grid.appendChild(col);
+      });
+
+      container.appendChild(grid);
+    })();
+    </script>
+
+    <!-- Productos -->
+    <section class="py-24" id="productos">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="mb-16 text-center">
+          <h2 class="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-primary">Tienda saludable</h2>
+          <h3 class="text-4xl font-bold text-warm-gray dark:text-white md:text-5xl">Productos disponibles</h3>
+          <p class="mt-4 text-warm-gray/60 max-w-lg mx-auto">Haz clic en los productos para armar tu pedido. Cada clic
+            agrega 1 libra y el mensaje se llena automáticamente en español.</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-6">
+          <button
+            class="product-card w-full cursor-pointer rounded-2xl bg-white dark:bg-slate-800 p-6 text-center border border-orange-100 dark:border-slate-700 hover:border-primary hover:-translate-y-1 transition-all shadow-sm"
+            data-product-name="Marañón" data-product-price="65" type="button">
+            <div class="text-4xl mb-3">🌰</div>
+            <h4 class="font-bold text-sm text-warm-gray dark:text-white mb-1">Marañón</h4>
+            <p class="text-xs text-warm-gray/50 mb-2">1 libra</p>
+            <span class="text-xl font-bold text-accent-green">Q65</span>
+          </button>
+          <button
+            class="product-card w-full cursor-pointer rounded-2xl bg-white dark:bg-slate-800 p-6 text-center border border-orange-100 dark:border-slate-700 hover:border-primary hover:-translate-y-1 transition-all shadow-sm"
+            data-product-name="Almendras" data-product-price="60" type="button">
+            <div class="text-4xl mb-3">🫘</div>
+            <h4 class="font-bold text-sm text-warm-gray dark:text-white mb-1">Almendras</h4>
+            <p class="text-xs text-warm-gray/50 mb-2">1 libra</p>
+            <span class="text-xl font-bold text-accent-green">Q60</span>
+          </button>
+          <button
+            class="product-card w-full cursor-pointer rounded-2xl bg-white dark:bg-slate-800 p-6 text-center border border-orange-100 dark:border-slate-700 hover:border-primary hover:-translate-y-1 transition-all shadow-sm"
+            data-product-name="Macadamia" data-product-price="55" type="button">
+            <div class="text-4xl mb-3">🥜</div>
+            <h4 class="font-bold text-sm text-warm-gray dark:text-white mb-1">Macadamia</h4>
+            <p class="text-xs text-warm-gray/50 mb-2">1 libra</p>
+            <span class="text-xl font-bold text-accent-green">Q55</span>
+          </button>
+          <button
+            class="product-card w-full cursor-pointer rounded-2xl bg-white dark:bg-slate-800 p-6 text-center border border-orange-100 dark:border-slate-700 hover:border-primary hover:-translate-y-1 transition-all shadow-sm"
+            data-product-name="Manía Horneada" data-product-price="20" type="button">
+            <div class="text-4xl mb-3">🥜</div>
+            <h4 class="font-bold text-sm text-warm-gray dark:text-white mb-1">Manía Horneada</h4>
+            <p class="text-xs text-warm-gray/50 mb-2">1 libra</p>
+            <span class="text-xl font-bold text-accent-green">Q20</span>
+          </button>
+          <button
+            class="product-card w-full cursor-pointer rounded-2xl bg-white dark:bg-slate-800 p-6 text-center border border-orange-100 dark:border-slate-700 hover:border-primary hover:-translate-y-1 transition-all shadow-sm"
+            data-product-name="Semillas Mixtas" data-product-price="60" type="button">
+            <div class="text-4xl mb-3">🎉</div>
+            <h4 class="font-bold text-sm text-warm-gray dark:text-white mb-1">Semillas Mixtas</h4>
+            <p class="text-xs text-warm-gray/50 mb-2">1 libra</p>
+            <span class="text-xl font-bold text-accent-green">Q60</span>
+          </button>
+          <button
+            class="product-card w-full cursor-pointer rounded-2xl bg-white dark:bg-slate-800 p-6 text-center border border-orange-100 dark:border-slate-700 hover:border-primary hover:-translate-y-1 transition-all shadow-sm"
+            data-product-name="Mixtas con Pasas" data-product-price="60" type="button">
+            <div class="text-4xl mb-3">🍇</div>
+            <h4 class="font-bold text-sm text-warm-gray dark:text-white mb-1">Mixtas con Pasas</h4>
+            <p class="text-xs text-warm-gray/50 mb-2">1 libra</p>
+            <span class="text-xl font-bold text-accent-green">Q60</span>
+          </button>
+        </div>
+
+        <div class="mt-10 rounded-[2rem] border border-orange-100 bg-white/90 p-8 shadow-xl shadow-orange-100/40">
+          <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+            <div class="max-w-2xl">
+              <p class="text-sm font-bold uppercase tracking-[0.25em] text-accent-green">Tu pedido</p>
+              <h4 class="mt-2 text-2xl font-bold text-warm-gray">Resumen automático</h4>
+              <p class="mt-2 text-sm font-medium text-warm-gray/60">Puedes sumar varias libras del mismo producto
+                haciendo clic otra vez. Usa los botones del resumen para ajustar cantidades.</p>
+            </div>
+            <button
+              class="rounded-full border border-orange-200 px-5 py-2 text-sm font-bold text-warm-gray transition-colors hover:border-primary hover:text-primary"
+              id="clear-order-button" type="button">
+              Limpiar pedido
+            </button>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-3" id="order-summary">
+            <span class="text-sm font-medium text-warm-gray/50">Todavía no has agregado productos.</span>
+          </div>
+          <div class="mt-6 grid gap-4 md:grid-cols-[1fr_auto] md:items-end">
+            <div class="rounded-2xl bg-orange-50/60 p-5">
+              <p class="text-xs font-bold uppercase tracking-[0.2em] text-primary">Mensaje actual</p>
+              <p class="mt-3 whitespace-pre-line text-sm font-medium text-warm-gray/80" id="generated-message-preview">
+                Selecciona uno o más productos para generar el pedido automáticamente.</p>
+            </div>
+            <div class="rounded-2xl bg-accent-green/10 p-5 text-sm font-bold text-warm-gray">
+              <p>Total estimado</p>
+              <p class="mt-2 text-3xl text-accent-green" id="order-total">Q0</p>
+            </div>
+          </div>
+        </div>
+        <p class="mt-6 text-center text-sm text-warm-gray/60">
+          🚚 <strong>Envío a domicilio (casa u oficina):</strong> Q25
+        </p>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="bg-accent-green py-24 text-white relative overflow-hidden" id="testimonios">
+      <div class="absolute inset-0 opacity-10 pointer-events-none">
+        <div class="absolute top-10 left-10 w-64 h-64 organic-shape-1 bg-white"></div>
+        <div class="absolute bottom-10 right-10 w-80 h-80 organic-shape-2 bg-white"></div>
+      </div>
+      <div class="mx-auto max-w-7xl px-6 relative z-10">
+        <div class="mb-16 text-center">
+          <h3 class="text-4xl font-bold md:text-5xl">Familias más Felices</h3>
+          <p class="mt-4 opacity-80 text-lg">Lo que dicen nuestras familias guatemaltecas</p>
+        </div>
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div class="rounded-3xl bg-white/10 p-10 backdrop-blur-md border border-white/10">
+            <div class="mb-6 flex gap-1 text-primary">
+              <span class="material-symbols-outlined fill-1">star</span>
+              <span class="material-symbols-outlined fill-1">star</span>
+              <span class="material-symbols-outlined fill-1">star</span>
+              <span class="material-symbols-outlined fill-1">star</span>
+              <span class="material-symbols-outlined fill-1">star</span>
+            </div>
+            <p class="mb-8 text-xl font-medium italic leading-relaxed">"Maylin nos dio la tranquilidad que
+              necesitábamos. Su guía en lactancia fue el mejor regalo para mi bebé."</p>
+            <div class="flex items-center gap-4">
+              <div class="h-14 w-14 rounded-2xl bg-white/20 organic-shape-1 flex items-center justify-center text-2xl">
+                👩</div>
+              <div>
+                <p class="font-bold">María G.</p>
+                <p class="text-xs font-bold uppercase tracking-wider opacity-70">Mamá de Lucas · Guatemala</p>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-3xl bg-white/10 p-10 backdrop-blur-md border border-white/10">
+            <div class="mb-6 flex gap-1 text-primary">
+              <span class="material-symbols-outlined fill-1">star</span>
+              <span class="material-symbols-outlined fill-1">star</span>
+              <span class="material-symbols-outlined fill-1">star</span>
+              <span class="material-symbols-outlined fill-1">star</span>
+              <span class="material-symbols-outlined fill-1">star</span>
+            </div>
+            <p class="mb-8 text-xl font-medium italic leading-relaxed">"El acompañamiento en alimentación complementaria
+              fue increíble. Mi hijo disfruta cada comida y nosotros estamos tranquilos."</p>
+            <div class="flex items-center gap-4">
+              <div class="h-14 w-14 rounded-2xl bg-white/20 organic-shape-2 flex items-center justify-center text-2xl">
+                👩</div>
+              <div>
+                <p class="font-bold">Andrea P.</p>
+                <p class="text-xs font-bold uppercase tracking-wider opacity-70">Mamá de Mateo · Guatemala</p>
+              </div>
+            </div>
+          </div>
+          <div class="hidden lg:block rounded-3xl bg-white/10 p-10 backdrop-blur-md border border-white/10">
+            <div class="mb-6 flex gap-1 text-primary">
+              <span class="material-symbols-outlined fill-1">star</span>
+              <span class="material-symbols-outlined fill-1">star</span>
+              <span class="material-symbols-outlined fill-1">star</span>
+              <span class="material-symbols-outlined fill-1">star</span>
+              <span class="material-symbols-outlined fill-1">star</span>
+            </div>
+            <p class="mb-8 text-xl font-medium italic leading-relaxed">"Excelente profesional. El seguimiento
+              personalizado marca la diferencia en el desarrollo de nuestra familia."</p>
+            <div class="flex items-center gap-4">
+              <div class="h-14 w-14 rounded-2xl bg-white/20 organic-shape-1 flex items-center justify-center text-2xl">
+                👩</div>
+              <div>
+                <p class="font-bold">Carla M.</p>
+                <p class="text-xs font-bold uppercase tracking-wider opacity-70">Mamá de Sofía · Guatemala</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-24" id="contacto">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="overflow-hidden rounded-[3rem] bg-white dark:bg-slate-900 shadow-2xl border border-orange-100">
+          <div class="flex flex-col lg:flex-row">
+            <div class="w-full bg-primary/5 p-12 lg:w-2/5">
+              <h3 class="mb-10 text-3xl font-bold">Hablemos pronto</h3>
+              <div class="space-y-8">
+                <div class="flex gap-5">
+                  <div
+                    class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary text-white shadow-lg shadow-primary/20 text-xl">
+                    📍
+                  </div>
+                  <div>
+                    <p class="text-xs font-bold uppercase tracking-widest text-warm-gray/50">Clínica Presencial</p>
+                    <p class="text-lg font-bold">Zona 11, Ciudad de Guatemala</p>
+                  </div>
+                </div>
+                <div class="flex gap-5">
+                  <div
+                    class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-accent-green text-white shadow-lg shadow-accent-green/20 text-xl">
+                    💻
+                  </div>
+                  <div>
+                    <p class="text-xs font-bold uppercase tracking-widest text-warm-gray/50">Consulta Virtual</p>
+                    <p class="text-lg font-bold">Videollamada desde cualquier lugar</p>
+                  </div>
+                </div>
+                <div class="flex gap-5">
+                  <div
+                    class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-accent-red text-white shadow-lg shadow-accent-red/20 text-xl">
+                    🚗
+                  </div>
+                  <div>
+                    <p class="text-xs font-bold uppercase tracking-widest text-warm-gray/50">A Domicilio</p>
+                    <p class="text-lg font-bold">Casa u hospital · consultar cobertura</p>
+                  </div>
+                </div>
+                <div class="flex gap-5">
+                  <div
+                    class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-warm-gray text-white shadow-lg text-xl">
+                    💳
+                  </div>
+                  <div>
+                    <p class="text-xs font-bold uppercase tracking-widest text-warm-gray/50">Formas de pago</p>
+                    <p class="text-lg font-bold">Efectivo o transferencia bancaria</p>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-10 pt-8 border-t border-orange-100">
+                <p class="text-sm font-bold text-warm-gray/60 mb-2">🏅 Maylin Sic</p>
+                <p class="text-xs text-warm-gray/50">Nutricionista · Colegiada activa 5165</p>
+              </div>
+            </div>
+            <div class="w-full p-12 lg:w-3/5">
+              <h4 class="text-xl font-bold mb-8 text-warm-gray dark:text-white">📅 Solicitar cita</h4>
+              <form class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                <div class="flex flex-col gap-3">
+                  <label class="text-sm font-bold text-warm-gray dark:text-slate-300">Nombre completo</label>
+                  <input
+                    class="rounded-2xl border-orange-100 dark:border-slate-800 bg-orange-50/50 dark:bg-slate-800 px-6 py-4 focus:border-primary focus:ring-primary font-medium"
+                    placeholder="Tu nombre" type="text" />
+                </div>
+                <div class="flex flex-col gap-3">
+                  <label class="text-sm font-bold text-warm-gray dark:text-slate-300">Teléfono / WhatsApp</label>
+                  <input
+                    class="rounded-2xl border-orange-100 dark:border-slate-800 bg-orange-50/50 dark:bg-slate-800 px-6 py-4 focus:border-primary focus:ring-primary font-medium"
+                    placeholder="+502 0000-0000" type="tel" />
+                </div>
+                <div class="flex flex-col gap-3 md:col-span-2">
+                  <label class="text-sm font-bold text-warm-gray dark:text-slate-300">Correo electrónico</label>
+                  <input
+                    class="rounded-2xl border-orange-100 dark:border-slate-800 bg-orange-50/50 dark:bg-slate-800 px-6 py-4 focus:border-primary focus:ring-primary font-medium"
+                    placeholder="tucorreo@email.com" type="email" />
+                </div>
+                <div class="flex flex-col gap-3">
+                  <label class="text-sm font-bold text-warm-gray dark:text-slate-300">Tipo de consulta</label>
+                  <select
+                    class="rounded-2xl border-orange-100 dark:border-slate-800 bg-orange-50/50 dark:bg-slate-800 px-6 py-4 focus:border-primary focus:ring-primary font-bold">
+                    <option value="">Seleccionar...</option>
+                    <option>Primera consulta</option>
+                    <option>Reconsulta</option>
+                    <option>Consulta familiar</option>
+                    <option>Lactancia pre/post parto</option>
+                  </select>
+                </div>
+                <div class="flex flex-col gap-3">
+                  <label class="text-sm font-bold text-warm-gray dark:text-slate-300">Modalidad</label>
+                  <select
+                    class="rounded-2xl border-orange-100 dark:border-slate-800 bg-orange-50/50 dark:bg-slate-800 px-6 py-4 focus:border-primary focus:ring-primary font-bold">
+                    <option value="">Seleccionar...</option>
+                    <option>Presencial – Zona 11</option>
+                    <option>Virtual</option>
+                    <option>A domicilio</option>
+                  </select>
+                </div>
+                <div class="flex flex-col gap-3 md:col-span-2">
+                  <label class="text-sm font-bold text-warm-gray dark:text-slate-300">Mensaje (opcional)</label>
+                  <textarea
+                    class="rounded-2xl border-orange-100 dark:border-slate-800 bg-orange-50/50 dark:bg-slate-800 px-6 py-4 focus:border-primary focus:ring-primary font-medium"
+                    id="message-field" placeholder="Cuéntame brevemente sobre lo que buscas..." rows="6"></textarea>
+                </div>
+                <div class="md:col-span-2">
+                  <p class="text-xs font-medium text-warm-gray/50">La selección de productos y tarifas se agregará aquí
+                    automáticamente cuando marques una o más opciones.</p>
+                </div>
+                <button
+                  class="rounded-2xl bg-primary px-10 py-5 text-lg font-bold text-white shadow-xl shadow-primary/20 hover:scale-[1.02] md:col-span-2 transition-all">
+                  Enviar solicitud 🌿
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-orange-100 dark:border-slate-800 bg-white dark:bg-background-dark py-12">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="flex flex-col items-center justify-between gap-8 md:flex-row">
+          <div class="flex flex-col items-center md:items-start gap-2">
+            <img alt="Saludable Logo" class="h-16 w-auto" src="image.png" />
+            <p class="text-xs font-medium text-warm-gray/50 italic">no es dieta, es estilo de vida</p>
+          </div>
+          <nav class="flex flex-wrap justify-center gap-6 text-sm font-bold text-warm-gray/70">
+            <a class="hover:text-primary transition-colors" href="#servicios">Servicios</a>
+            <a class="hover:text-primary transition-colors" href="#precios">Precios</a>
+            <a class="hover:text-primary transition-colors" href="#horarios">Disponibilidad</a>
+            <a class="hover:text-primary transition-colors" href="#productos">Productos</a>
+            <a class="hover:text-primary transition-colors" href="#contacto">Contacto</a>
+          </nav>
+        </div>
+        <div class="mt-8 text-center text-xs font-bold text-warm-gray/40 uppercase tracking-widest">
+          © 2026 · Maylin Sic · Nutricionista Colegiada 5165 · Guatemala
+        </div>
+        <div class="mt-3 text-center text-xs text-warm-gray/30">
+          creado por <a href="https://www.sagepoint-analytics.com/" target="_blank" rel="noopener" class="hover:text-primary transition-colors">Sagepoint Analytics</a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- WhatsApp flotante -->
+  <a class="wa-float" href="https://wa.me/502" id="whatsapp-link" target="_blank" title="Contáctame por WhatsApp">
+    💬
+  </a>
+
+  <script>
+    const productCards = Array.from(document.querySelectorAll(".product-card"));
+    const serviceCards = Array.from(document.querySelectorAll(".service-card"));
+    const orderSummary = document.getElementById("order-summary");
+    const serviceSummary = document.getElementById("service-summary");
+    const orderTotal = document.getElementById("order-total");
+    const serviceTotal = document.getElementById("service-total");
+    const generatedMessagePreview = document.getElementById("generated-message-preview");
+    const pricingMessagePreview = document.getElementById("pricing-message-preview");
+    const messageField = document.getElementById("message-field");
+    const clearOrderButton = document.getElementById("clear-order-button");
+    const clearServiceButton = document.getElementById("clear-service-button");
+    const whatsappLink = document.getElementById("whatsapp-link");
+    const baseWhatsappUrl = whatsappLink.getAttribute("href") || "https://wa.me/";
+    const emptyPreviewMessage = "Selecciona productos o tarifas para generar el mensaje automáticamente.";
+    const selectedProducts = new Map();
+    const selectedServices = new Map();
+    const messagePreviews = [generatedMessagePreview, pricingMessagePreview].filter(Boolean);
+
+    function formatPounds(quantity) {
+      return quantity === 1 ? "1 libra" : quantity + " libras";
+    }
+
+    function formatAppointments(quantity) {
+      return quantity === 1 ? "1 cita" : quantity + " citas";
+    }
+
+    function updateOrderSummary(items) {
+      if (!items.length) {
+        orderSummary.innerHTML = '<span class="text-sm font-medium text-warm-gray/50">Todavía no has agregado productos.</span>';
+        return;
+      }
+
+      orderSummary.innerHTML = items.map(function (item) {
+        return (
+          '<div class="order-chip">' +
+          '<button aria-label="Quitar una libra de ' + item.name + '" data-action="decrease" data-product-name="' + item.name + '" type="button">−</button>' +
+          '<span>' + item.quantity + ' lb · ' + item.name + '</span>' +
+          '<button aria-label="Agregar otra libra de ' + item.name + '" data-action="increase" data-product-name="' + item.name + '" type="button">+</button>' +
+          "</div>"
+        );
+      }).join("");
+    }
+
+    function updateServiceSummary(items) {
+      if (!items.length) {
+        serviceSummary.innerHTML = '<span class="text-sm font-medium text-warm-gray/50">Todavía no has agregado tarifas.</span>';
+        return;
+      }
+
+      serviceSummary.innerHTML = items.map(function (item) {
+        return (
+          '<div class="order-chip">' +
+          '<button aria-label="Quitar una cita de ' + item.name + '" data-action="decrease" data-service-name="' + item.name + '" type="button">−</button>' +
+          '<span>' + item.quantity + ' cita' + (item.quantity > 1 ? 's' : '') + ' · ' + item.name + '</span>' +
+          '<button aria-label="Agregar otra cita de ' + item.name + '" data-action="increase" data-service-name="' + item.name + '" type="button">+</button>' +
+          "</div>"
+        );
+      }).join("");
+    }
+
+    function updateProductCards() {
+      productCards.forEach(function (card) {
+        const productName = card.dataset.productName;
+        const quantity = selectedProducts.get(productName) || 0;
+        card.classList.toggle("is-selected", quantity > 0);
+        card.setAttribute("aria-pressed", quantity > 0 ? "true" : "false");
+
+        const existingBadge = card.querySelector(".selection-badge");
+        if (existingBadge) {
+          existingBadge.remove();
+        }
+
+        if (quantity > 0) {
+          const badge = document.createElement("span");
+          badge.className = "selection-badge";
+          badge.textContent = quantity + " lb";
+          card.appendChild(badge);
+        }
+      });
+    }
+
+    function updateServiceCards() {
+      serviceCards.forEach(function (card) {
+        const serviceName = card.dataset.serviceName;
+        const quantity = selectedServices.get(serviceName) || 0;
+        card.classList.toggle("is-selected", quantity > 0);
+        card.setAttribute("aria-pressed", quantity > 0 ? "true" : "false");
+
+        const existingBadge = card.querySelector(".selection-badge");
+        if (existingBadge) {
+          existingBadge.remove();
+        }
+
+        if (quantity > 0) {
+          const badge = document.createElement("span");
+          badge.className = "selection-badge";
+          badge.textContent = quantity + " cita" + (quantity > 1 ? "s" : "");
+          card.appendChild(badge);
+        }
+      });
+    }
+
+    function getSelectedProductItems() {
+      return productCards
+        .map(function (card) {
+          const name = card.dataset.productName;
+          const price = Number(card.dataset.productPrice);
+          const quantity = selectedProducts.get(name) || 0;
+          return { name: name, price: price, quantity: quantity };
+        })
+        .filter(function (item) {
+          return item.quantity > 0;
+        });
+    }
+
+    function getSelectedServiceItems() {
+      return serviceCards
+        .map(function (card) {
+          const name = card.dataset.serviceName;
+          const price = Number(card.dataset.servicePrice);
+          const quantity = selectedServices.get(name) || 0;
+          return { name: name, price: price, quantity: quantity };
+        })
+        .filter(function (item) {
+          return item.quantity > 0;
+        });
+    }
+
+    function buildMessage(serviceItems, productItems) {
+      if (!serviceItems.length && !productItems.length) {
+        return "";
+      }
+
+      const sections = [];
+
+      if (serviceItems.length) {
+        const serviceLines = serviceItems.map(function (item) {
+          return "- " + formatAppointments(item.quantity) + " de " + item.name.toLowerCase();
+        });
+        sections.push("Consultas:\n" + serviceLines.join("\n"));
+      }
+
+      if (productItems.length) {
+        const productLines = productItems.map(function (item) {
+          return "- " + formatPounds(item.quantity) + " de " + item.name.toLowerCase();
+        });
+        sections.push("Productos:\n" + productLines.join("\n"));
+      }
+
+      return [
+        "Hola, me gustaría solicitar:",
+        "",
+        sections.join("\n\n"),
+        "",
+        "¿Me compartes disponibilidad, por favor?"
+      ].join("\n");
+    }
+
+    function syncSelectionsUi() {
+      const productItems = getSelectedProductItems();
+      const serviceItems = getSelectedServiceItems();
+
+      const productTotal = productItems.reduce(function (sum, item) {
+        return sum + item.price * item.quantity;
+      }, 0);
+      const selectedServiceTotal = serviceItems.reduce(function (sum, item) {
+        return sum + item.price * item.quantity;
+      }, 0);
+      const message = buildMessage(serviceItems, productItems);
+
+      updateProductCards();
+      updateServiceCards();
+      updateOrderSummary(productItems);
+      updateServiceSummary(serviceItems);
+      orderTotal.textContent = "Q" + productTotal;
+      serviceTotal.textContent = "Q" + selectedServiceTotal;
+      messagePreviews.forEach(function (preview) {
+        preview.textContent = message || emptyPreviewMessage;
+      });
+      messageField.value = message;
+      whatsappLink.href = message ? baseWhatsappUrl + "?text=" + encodeURIComponent(message) : baseWhatsappUrl;
+    }
+
+    productCards.forEach(function (card) {
+      card.addEventListener("click", function () {
+        const productName = card.dataset.productName;
+        const currentQuantity = selectedProducts.get(productName) || 0;
+        selectedProducts.set(productName, currentQuantity + 1);
+        syncSelectionsUi();
+      });
+    });
+
+    serviceCards.forEach(function (card) {
+      card.addEventListener("click", function () {
+        const serviceName = card.dataset.serviceName;
+        const currentQuantity = selectedServices.get(serviceName) || 0;
+        selectedServices.set(serviceName, currentQuantity + 1);
+        syncSelectionsUi();
+      });
+    });
+
+    orderSummary.addEventListener("click", function (event) {
+      const button = event.target.closest("button[data-action]");
+      if (!button) {
+        return;
+      }
+
+      const productName = button.dataset.productName;
+      const currentQuantity = selectedProducts.get(productName) || 0;
+
+      if (button.dataset.action === "increase") {
+        selectedProducts.set(productName, currentQuantity + 1);
+      }
+
+      if (button.dataset.action === "decrease") {
+        const nextQuantity = currentQuantity - 1;
+        if (nextQuantity > 0) {
+          selectedProducts.set(productName, nextQuantity);
+        } else {
+          selectedProducts.delete(productName);
+        }
+      }
+
+      syncSelectionsUi();
+    });
+
+    serviceSummary.addEventListener("click", function (event) {
+      const button = event.target.closest("button[data-action]");
+      if (!button) {
+        return;
+      }
+
+      const serviceName = button.dataset.serviceName;
+      const currentQuantity = selectedServices.get(serviceName) || 0;
+
+      if (button.dataset.action === "increase") {
+        selectedServices.set(serviceName, currentQuantity + 1);
+      }
+
+      if (button.dataset.action === "decrease") {
+        const nextQuantity = currentQuantity - 1;
+        if (nextQuantity > 0) {
+          selectedServices.set(serviceName, nextQuantity);
+        } else {
+          selectedServices.delete(serviceName);
+        }
+      }
+
+      syncSelectionsUi();
+    });
+
+    clearOrderButton.addEventListener("click", function () {
+      selectedProducts.clear();
+      syncSelectionsUi();
+    });
+
+    clearServiceButton.addEventListener("click", function () {
+      selectedServices.clear();
+      syncSelectionsUi();
+    });
+
+    syncSelectionsUi();
+  </script>
+</body>
+
+</html>
