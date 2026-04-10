@@ -72,6 +72,170 @@
         radial-gradient(circle at 90% 80%, rgba(118, 188, 33, 0.05) 0%, transparent 40%);
     }
 
+    .booking-shell {
+      position: relative;
+      overflow: hidden;
+      border-radius: 3rem;
+      background: linear-gradient(135deg, rgba(255, 252, 249, 0.94), rgba(255, 255, 255, 0.82));
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 30px 90px rgba(93, 83, 74, 0.12);
+      backdrop-filter: blur(18px);
+    }
+
+    .booking-shell::before,
+    .booking-shell::after {
+      content: "";
+      position: absolute;
+      border-radius: 9999px;
+      pointer-events: none;
+      filter: blur(10px);
+    }
+
+    .booking-shell::before {
+      top: -6rem;
+      left: -3rem;
+      width: 16rem;
+      height: 16rem;
+      background: radial-gradient(circle, rgba(239, 125, 0, 0.20) 0%, rgba(239, 125, 0, 0) 72%);
+    }
+
+    .booking-shell::after {
+      right: -5rem;
+      bottom: -7rem;
+      width: 18rem;
+      height: 18rem;
+      background: radial-gradient(circle, rgba(118, 188, 33, 0.22) 0%, rgba(118, 188, 33, 0) 70%);
+    }
+
+    .booking-panel,
+    .booking-frame {
+      position: relative;
+      z-index: 1;
+    }
+
+    .booking-stage {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .booking-stage-item {
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+      padding: 1rem 1.05rem;
+      border-radius: 1.5rem;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(239, 125, 0, 0.10);
+      box-shadow: 0 12px 30px rgba(93, 83, 74, 0.06);
+    }
+
+    .booking-stage-index {
+      flex-shrink: 0;
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: white;
+      background: linear-gradient(160deg, #ef7d00, #da1c22);
+      box-shadow: 0 12px 26px rgba(239, 125, 0, 0.26);
+    }
+
+    .booking-frame {
+      border-radius: 2.4rem;
+      padding: 1rem;
+      background: linear-gradient(160deg, rgba(239, 125, 0, 0.08), rgba(118, 188, 33, 0.07));
+      border: 1.5px solid rgba(239, 125, 0, 0.15);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+    }
+
+    .booking-brand-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem 1.1rem 1rem;
+    }
+
+    .booking-brand-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 9999px;
+      object-fit: cover;
+      object-position: center top;
+      border: 2.5px solid rgba(239, 125, 0, 0.3);
+      box-shadow: 0 4px 12px rgba(239, 125, 0, 0.15);
+      flex-shrink: 0;
+    }
+
+    .booking-live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.4rem 0.85rem;
+      border-radius: 9999px;
+      background: rgba(118, 188, 33, 0.12);
+      border: 1px solid rgba(118, 188, 33, 0.2);
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #5a9414;
+      white-space: nowrap;
+    }
+
+    .booking-live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 9999px;
+      background: #76bc21;
+      flex-shrink: 0;
+      animation: live-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes live-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .booking-widget-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1.75rem;
+      background: rgba(255,252,249,0.6);
+      padding: 0;
+    }
+
+    .booking-widget-wrap .calendly-inline-widget {
+      min-width: 320px;
+      height: 720px;
+    }
+
+    .booking-widget-wrap iframe {
+      border-radius: 1.75rem;
+    }
+
+    @media (max-width: 768px) {
+      .booking-shell {
+        border-radius: 2rem;
+      }
+
+      .booking-frame {
+        padding: 0.7rem;
+        border-radius: 1.75rem;
+      }
+
+      .booking-widget-wrap {
+        border-radius: 1.35rem;
+      }
+
+      .booking-widget-wrap .calendly-inline-widget {
+        height: 660px;
+      }
+    }
+
     /* Fruit background layer */
     .fruit-bg-item {
       position: absolute;
@@ -310,7 +474,7 @@
           <a class="text-sm font-bold hover:text-primary transition-colors" href="#sobre-mi">Sobre mí</a>
           <a class="text-sm font-bold hover:text-primary transition-colors" href="#contacto">Contacto</a>
         </nav>
-        <a href="#contacto"
+        <a href="#horarios"
           class="rounded-full bg-primary px-6 py-2.5 text-sm font-bold text-white shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
           Programar Cita
         </a>
@@ -341,7 +505,7 @@
               adaptados a tu vida real.
             </p>
             <div class="flex flex-col gap-4 sm:flex-row pt-4">
-              <a href="#contacto"
+              <a href="#horarios"
                 class="flex h-14 items-center justify-center rounded-2xl bg-accent-red px-10 text-lg font-bold text-white shadow-xl shadow-accent-red/20 hover:bg-accent-red/90 transition-all hover:scale-[1.02]">
                 Programar mi consulta
               </a>
@@ -416,8 +580,8 @@
               durante el embarazo y posparto. Planes personalizados por etapa para prevenir diabetes gestacional y otras
               complicaciones.</p>
             <a class="inline-flex items-center font-bold text-primary gap-2 group-hover:gap-4 transition-all text-sm"
-              href="#contacto">
-              Enviar mensaje <span class="material-symbols-outlined text-base">arrow_right_alt</span>
+              href="#horarios">
+              Ver horarios <span class="material-symbols-outlined text-base">arrow_right_alt</span>
             </a>
           </div>
 
@@ -433,8 +597,8 @@
               especializada para iniciar, mantener o mejorar la lactancia. Resolución de dudas con base científica y
               mucho cariño.</p>
             <a class="inline-flex items-center font-bold text-accent-red gap-2 group-hover:gap-4 transition-all text-sm"
-              href="#contacto">
-              Enviar mensaje <span class="material-symbols-outlined text-base">arrow_right_alt</span>
+              href="#horarios">
+              Ver horarios <span class="material-symbols-outlined text-base">arrow_right_alt</span>
             </a>
           </div>
 
@@ -450,8 +614,8 @@
               introducir alimentos sólidos de forma segura, respetando el ritmo del bebé y promoviendo hábitos
               saludables desde el inicio.</p>
             <a class="inline-flex items-center font-bold text-accent-green gap-2 group-hover:gap-4 transition-all text-sm"
-              href="#contacto">
-              Enviar mensaje <span class="material-symbols-outlined text-base">arrow_right_alt</span>
+              href="#horarios">
+              Ver horarios <span class="material-symbols-outlined text-base">arrow_right_alt</span>
             </a>
           </div>
 
@@ -467,8 +631,8 @@
               el proceso de destete de manera gradual, amorosa y respetuosa, cuidando el vínculo y el bienestar de mamá
               y bebé.</p>
             <a class="inline-flex items-center font-bold text-primary gap-2 group-hover:gap-4 transition-all text-sm"
-              href="#contacto">
-              Enviar mensaje <span class="material-symbols-outlined text-base">arrow_right_alt</span>
+              href="#horarios">
+              Ver horarios <span class="material-symbols-outlined text-base">arrow_right_alt</span>
             </a>
           </div>
 
@@ -484,8 +648,8 @@
               orientación nutricional para apoyar el crecimiento y la formación de hábitos saludables en cada etapa de
               la infancia.</p>
             <a class="inline-flex items-center font-bold text-accent-red gap-2 group-hover:gap-4 transition-all text-sm"
-              href="#contacto">
-              Enviar mensaje <span class="material-symbols-outlined text-base">arrow_right_alt</span>
+              href="#horarios">
+              Ver horarios <span class="material-symbols-outlined text-base">arrow_right_alt</span>
             </a>
           </div>
 
@@ -501,8 +665,8 @@
               prácticas para mejorar la alimentación de toda la familia, con menús equilibrados y hábitos sostenibles en
               el hogar.</p>
             <a class="inline-flex items-center font-bold text-accent-green gap-2 group-hover:gap-4 transition-all text-sm"
-              href="#contacto">
-              Enviar mensaje <span class="material-symbols-outlined text-base">arrow_right_alt</span>
+              href="#horarios">
+              Ver horarios <span class="material-symbols-outlined text-base">arrow_right_alt</span>
             </a>
           </div>
 
@@ -565,7 +729,7 @@
               <h3 class="text-3xl font-bold mb-4">Un plan diseñado solo para ti</h3>
               <p class="opacity-90 text-lg mb-8 leading-relaxed">Cada consulta es única. Analizo tus hábitos, tu cuerpo
                 y tu estilo de vida para darte un plan real y sostenible.</p>
-              <a href="#contacto"
+              <a href="#horarios"
                 class="inline-block bg-white text-primary font-bold px-8 py-3 rounded-full shadow-lg hover:scale-105 transition-transform">
                 Quiero mi consulta →
               </a>
@@ -618,7 +782,7 @@
                 </li>
               </ul>
               <div class="pt-8">
-                <a href="#contacto"
+                <a href="#horarios"
                   class="inline-block rounded-2xl bg-warm-gray dark:bg-white dark:text-warm-gray px-10 py-4 font-bold text-white transition-all hover:bg-primary dark:hover:bg-primary dark:hover:text-white shadow-lg">
                   Programar con Maylin
                 </a>
@@ -635,46 +799,51 @@
         <div class="mb-16 text-center">
           <h2 class="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-accent-red">Inversión en tu salud</h2>
           <h3 class="text-4xl font-bold text-warm-gray dark:text-white md:text-5xl">Tarifas claras y accesibles</h3>
-          <p class="mt-4 text-warm-gray/60 max-w-2xl mx-auto">Haz clic en una o varias tarifas para agregarlas al
-            mensaje. Cada clic suma 1 cita y el texto se actualiza automáticamente en español.</p>
+          <p class="mt-4 text-warm-gray/60 max-w-2xl mx-auto">Encuentra el plan que mejor se adapte a tus necesidades. Todas nuestras consultas están diseñadas para ofrecerte un acompañamiento integral.</p>
         </div>
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-3 mb-10">
           <!-- Primera consulta -->
-          <button
-            class="service-card w-full cursor-pointer rounded-3xl p-8 text-center shadow-2xl price-featured border-2 border-transparent transition-all"
-            data-service-name="Primera consulta" data-service-price="350" type="button">
+          <div
+            class="service-card flex flex-col h-full w-full rounded-3xl p-8 text-center shadow-2xl price-featured border-2 border-transparent transition-all">
             <div class="text-4xl mb-4">⭐</div>
             <h4 class="text-sm font-bold uppercase tracking-widest opacity-90 mb-2">Primera Consulta</h4>
             <div class="text-5xl font-bold mb-1">Q350</div>
             <p class="text-sm opacity-80 mb-4">Evaluación completa incluida</p>
-            <p class="text-sm opacity-75 leading-relaxed">Ideal para empezar. Incluye toda la evaluación y tu primer
+            <p class="text-sm opacity-75 leading-relaxed flex-grow">Ideal para empezar. Incluye toda la evaluación y tu primer
               plan personalizado.</p>
-          </button>
+            <a href="#horarios" class="mt-6 inline-block w-full rounded-full bg-white text-primary font-bold py-3 hover:scale-105 transition-transform shadow-lg cursor-pointer">
+              Agendar espacio
+            </a>
+          </div>
 
           <!-- Reconsulta -->
-          <button
-            class="service-card w-full cursor-pointer rounded-3xl bg-white dark:bg-slate-800 p-8 text-center border-2 border-orange-100 dark:border-slate-700 hover:border-primary transition-colors hover:shadow-xl"
-            data-service-name="Reconsulta" data-service-price="300" type="button">
+          <div
+            class="service-card flex flex-col h-full w-full rounded-3xl bg-white dark:bg-slate-800 p-8 text-center border-2 border-orange-100 dark:border-slate-700 transition-colors hover:border-primary hover:shadow-xl">
             <div class="text-4xl mb-4">🔄</div>
             <h4 class="text-sm font-bold uppercase tracking-widest text-warm-gray/60 mb-2">Reconsulta</h4>
             <div class="text-5xl font-bold text-warm-gray dark:text-white mb-1">Q300</div>
             <p class="text-sm text-warm-gray/60 mb-4">Seguimiento y ajustes</p>
-            <p class="text-sm text-warm-gray/60 leading-relaxed">Revisamos tu progreso y ajustamos el plan según tus
+            <p class="text-sm text-warm-gray/60 leading-relaxed flex-grow">Revisamos tu progreso y ajustamos el plan según tus
               avances.</p>
-          </button>
+            <a href="#horarios" class="mt-6 inline-block w-full rounded-full bg-primary text-white font-bold py-3 hover:bg-primary/90 transition-colors shadow-md cursor-pointer">
+              Agendar espacio
+            </a>
+          </div>
 
           <!-- Lactancia -->
-          <button
-            class="service-card w-full cursor-pointer rounded-3xl bg-white dark:bg-slate-800 p-8 text-center border-2 border-orange-100 dark:border-slate-700 hover:border-accent-red transition-colors hover:shadow-xl"
-            data-service-name="Lactancia pre/post parto (2 consultas)" data-service-price="550" type="button">
+          <div
+            class="service-card flex flex-col h-full w-full rounded-3xl bg-white dark:bg-slate-800 p-8 text-center border-2 border-orange-100 dark:border-slate-700 transition-colors hover:border-accent-red hover:shadow-xl">
             <div class="text-4xl mb-4">🤱</div>
             <h4 class="text-sm font-bold uppercase tracking-widest text-warm-gray/60 mb-2">Lactancia Pre/Post Parto</h4>
             <div class="text-5xl font-bold text-warm-gray dark:text-white mb-1">Q550</div>
             <p class="text-sm text-warm-gray/60 mb-4">Incluye 2 consultas</p>
-            <p class="text-sm text-warm-gray/60 leading-relaxed">Dos consultas completas enfocadas en apoyo de lactancia
+            <p class="text-sm text-warm-gray/60 leading-relaxed flex-grow">Dos consultas completas enfocadas en apoyo de lactancia
               materna.</p>
-          </button>
+            <a href="#horarios" class="mt-6 inline-block w-full rounded-full bg-accent-red text-white font-bold py-3 hover:bg-accent-red/90 transition-colors shadow-md cursor-pointer">
+              Agendar espacio
+            </a>
+          </div>
         </div>
 
         <!-- Tabla familiar -->
@@ -684,185 +853,150 @@
             <h4 class="text-xl font-bold text-warm-gray dark:text-white">🏠 Consultas Familiares</h4>
           </div>
           <div class="divide-y divide-orange-50 dark:divide-slate-700">
-            <button
-              class="service-card flex w-full items-center justify-between px-8 py-4 text-left hover:bg-orange-50/30 transition-colors"
-              data-service-name="Consulta familiar: 2 adultos + 2–3 niños" data-service-price="600" type="button">
-              <span class="font-medium">2 adultos + 2–3 niños</span>
-              <span class="text-xl font-bold text-primary">Q600</span>
-            </button>
-            <button
-              class="service-card flex w-full items-center justify-between px-8 py-4 text-left hover:bg-orange-50/30 transition-colors"
-              data-service-name="Consulta familiar: 2 adultos + 1 niño" data-service-price="500" type="button">
-              <span class="font-medium">2 adultos + 1 niño</span>
-              <span class="text-xl font-bold text-primary">Q500</span>
-            </button>
-            <button
-              class="service-card flex w-full items-center justify-between px-8 py-4 text-left hover:bg-orange-50/30 transition-colors"
-              data-service-name="Consulta familiar: 1 adulto + 2–3 niños" data-service-price="400" type="button">
-              <span class="font-medium">1 adulto + 2–3 niños</span>
-              <span class="text-xl font-bold text-primary">Q400</span>
-            </button>
-          </div>
-        </div>
-        <div class="mt-10 rounded-[2rem] border border-orange-100 bg-white/90 p-8 shadow-xl shadow-orange-100/40">
-          <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-            <div class="max-w-2xl">
-              <p class="text-sm font-bold uppercase tracking-[0.25em] text-accent-red">Tus tarifas</p>
-              <h4 class="mt-2 text-2xl font-bold text-warm-gray">Resumen automático</h4>
-              <p class="mt-2 text-sm font-medium text-warm-gray/60">Puedes sumar varias citas de la misma opción
-                haciendo clic otra vez. Usa los botones del resumen para ajustar cantidades.</p>
+            <div
+              class="flex flex-col sm:flex-row w-full items-start sm:items-center justify-between px-8 py-6 gap-4 hover:bg-orange-50/30 transition-colors">
+              <span class="font-medium text-lg">2 adultos + 2–3 niños</span>
+              <div class="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">
+                <span class="text-2xl font-bold text-primary">Q600</span>
+                <a href="#horarios" class="inline-flex items-center justify-center text-sm font-bold text-white bg-primary px-6 py-2 rounded-full hover:bg-primary/90 transition-colors shadow-md min-w-[120px]">
+                  Reservar
+                </a>
+              </div>
             </div>
-            <button
-              class="rounded-full border border-orange-200 px-5 py-2 text-sm font-bold text-warm-gray transition-colors hover:border-primary hover:text-primary"
-              id="clear-service-button" type="button">
-              Limpiar tarifas
-            </button>
-          </div>
-          <div class="mt-6 flex flex-wrap gap-3" id="service-summary">
-            <span class="text-sm font-medium text-warm-gray/50">Todavía no has agregado tarifas.</span>
-          </div>
-          <div class="mt-6 grid gap-4 md:grid-cols-[1fr_auto] md:items-end">
-            <div class="rounded-2xl bg-orange-50/60 p-5">
-              <p class="text-xs font-bold uppercase tracking-[0.2em] text-primary">Mensaje actual</p>
-              <p class="mt-3 whitespace-pre-line text-sm font-medium text-warm-gray/80" id="pricing-message-preview">
-                Selecciona productos o tarifas para generar el mensaje automáticamente.</p>
+            <div
+              class="flex flex-col sm:flex-row w-full items-start sm:items-center justify-between px-8 py-6 gap-4 hover:bg-orange-50/30 transition-colors">
+              <span class="font-medium text-lg">2 adultos + 1 niño</span>
+              <div class="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">
+                <span class="text-2xl font-bold text-primary">Q500</span>
+                <a href="#horarios" class="inline-flex items-center justify-center text-sm font-bold text-white bg-primary px-6 py-2 rounded-full hover:bg-primary/90 transition-colors shadow-md min-w-[120px]">
+                  Reservar
+                </a>
+              </div>
             </div>
-            <div class="rounded-2xl bg-primary/10 p-5 text-sm font-bold text-warm-gray">
-              <p>Total estimado</p>
-              <p class="mt-2 text-3xl text-primary" id="service-total">Q0</p>
+            <div
+              class="flex flex-col sm:flex-row w-full items-start sm:items-center justify-between px-8 py-6 gap-4 hover:bg-orange-50/30 transition-colors">
+              <span class="font-medium text-lg">1 adulto + 2–3 niños</span>
+              <div class="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">
+                <span class="text-2xl font-bold text-primary">Q400</span>
+                <a href="#horarios" class="inline-flex items-center justify-center text-sm font-bold text-white bg-primary px-6 py-2 rounded-full hover:bg-primary/90 transition-colors shadow-md min-w-[120px]">
+                  Reservar
+                </a>
+              </div>
             </div>
           </div>
         </div>
-        <p class="mt-6 text-center text-sm text-warm-gray/60">
-          💳 <strong>Formas de pago:</strong> Efectivo o transferencia bancaria.
+        
+        <p class="mt-8 text-center text-sm text-warm-gray/60 bg-white/50 py-3 rounded-full dark:bg-slate-800 border border-orange-100 max-w-fit mx-auto px-6">
+          💳 <strong>Formas de pago:</strong> Efectivo o transferencia bancaria en el momento de tu cita.
         </p>
       </div>
     </section>
 
     <!-- Calendario de Disponibilidad -->
-    <section class="bg-orange-50/30 dark:bg-slate-900/50 py-24" id="horarios">
-      <div class="mx-auto max-w-7xl px-6">
-        <div class="mb-16 text-center">
-          <h2 class="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-accent-green">Disponibilidad</h2>
+    <section class="relative bg-orange-50/30 dark:bg-slate-900/50 py-24 overflow-hidden" id="horarios">
+      <div class="absolute left-0 top-16 h-56 w-56 rounded-full bg-primary/10 blur-3xl"></div>
+      <div class="absolute right-0 top-28 h-72 w-72 rounded-full bg-accent-green/10 blur-3xl"></div>
+      <div class="relative z-10 mx-auto max-w-7xl px-6">
+        <div class="mb-12 text-center">
+          <h2 class="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-accent-green">Disponibilidad en Tiempo Real</h2>
           <h3 class="text-4xl font-bold text-warm-gray dark:text-white md:text-5xl">Programa tu consulta</h3>
-          <p class="mt-4 text-warm-gray/60 max-w-lg mx-auto">Consulta los días y horarios disponibles para agendar tu cita presencial o virtual.</p>
+          <p class="mt-4 text-warm-gray/60 max-w-2xl mx-auto">Selecciona el día y hora que mejor se adapte a tu rutina. Todo el proceso es rápido, seguro y tu espacio quedará reservado al instante.</p>
         </div>
 
-        <!-- Calendario semanal generado por JS -->
-        <div id="calendario-container" class="mb-10"></div>
+        <div class="booking-shell">
+          <div class="grid items-start gap-6 p-5 lg:grid-cols-[0.92fr_1.38fr] lg:p-7">
+            <div class="booking-panel rounded-[2.3rem] bg-white/70 p-7 shadow-lg shadow-primary/5 backdrop-blur-sm dark:bg-slate-900/70">
+              <div class="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-primary">
+                <span class="material-symbols-outlined text-sm">event_available</span>
+                Reserva Automática
+              </div>
+              <h4 class="mt-6 text-3xl font-bold leading-tight text-warm-gray dark:text-white">Asegura tu espacio en nuestra clínica</h4>
+              <p class="mt-4 text-base font-medium leading-relaxed text-warm-gray/70 dark:text-slate-300">
+                Elige la modalidad de tu atención de forma sencilla, revisa mi agenda y encuentra un horario que te convenga. Tu reserva será oficial inmediatamente.
+              </p>
 
-        <!-- Leyenda -->
-        <div class="flex flex-wrap justify-center gap-6 mb-10">
-          <div class="flex items-center gap-2">
-            <span class="inline-block w-4 h-4 rounded-full bg-emerald-500"></span>
-            <span class="text-sm font-bold text-warm-gray/70">🏥 Presencial – Clínica Zona 11</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="inline-block w-4 h-4 rounded-full bg-sky-500"></span>
-            <span class="text-sm font-bold text-warm-gray/70">💻 Virtual – Desde cualquier lugar</span>
+              <div class="mt-8 grid gap-3 sm:grid-cols-2">
+                <div class="rounded-2xl bg-white px-5 py-4 shadow-sm ring-1 ring-primary/10 dark:bg-slate-950/70">
+                  <p class="text-xs font-bold uppercase tracking-widest text-warm-gray/45">Modalidades</p>
+                  <p class="mt-2 text-base font-bold text-warm-gray dark:text-white">Presencial, virtual o domicilio</p>
+                </div>
+                <div class="rounded-2xl bg-white px-5 py-4 shadow-sm ring-1 ring-primary/10 dark:bg-slate-950/70">
+                  <p class="text-xs font-bold uppercase tracking-widest text-warm-gray/45">Confirmación</p>
+                  <p class="mt-2 text-base font-bold text-warm-gray dark:text-white">Inmediata por tu correo</p>
+                </div>
+              </div>
+
+              <div class="booking-stage mt-8">
+                <div class="booking-stage-item">
+                  <span class="booking-stage-index">1</span>
+                  <div>
+                    <p class="text-sm font-bold uppercase tracking-widest text-warm-gray/45">Elige Modalidad</p>
+                    <p class="mt-1 text-base font-bold text-warm-gray dark:text-white">Selecciona cómo deseas la cita</p>
+                  </div>
+                </div>
+                <div class="booking-stage-item">
+                  <span class="booking-stage-index">2</span>
+                  <div>
+                    <p class="text-sm font-bold uppercase tracking-widest text-warm-gray/45">Define Tu Horario</p>
+                    <p class="mt-1 text-base font-bold text-warm-gray dark:text-white">Haz clic sobre un horario activo</p>
+                  </div>
+                </div>
+                <div class="booking-stage-item">
+                  <span class="booking-stage-index">3</span>
+                  <div>
+                    <p class="text-sm font-bold uppercase tracking-widest text-warm-gray/45">Confirmación</p>
+                    <p class="mt-1 text-base font-bold text-warm-gray dark:text-white">Ingresa tus datos de paciente</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-8 rounded-[1.7rem] bg-gradient-to-br from-primary to-accent-red px-6 py-5 text-white shadow-xl shadow-primary/20">
+                <p class="text-xs font-bold uppercase tracking-[0.22em] opacity-80">¿Necesitas ayuda?</p>
+                <p class="mt-2 text-lg font-bold">Si tienes alguna duda antes de confirmar, puedes <a href="https://wa.me/50235245292" target="_blank" class="underline decoration-white/50 hover:decoration-white transition-colors">escribirme por WhatsApp</a>.</p>
+              </div>
+            </div>
+
+            <div class="booking-frame">
+              <!-- Branded header: replaces browser-chrome look -->
+              <div class="booking-brand-header">
+                <div style="display:flex;align-items:center;gap:0.75rem;">
+                  <img src="Meylin.jpeg" alt="Maylin Sic" class="booking-brand-avatar" />
+                  <div>
+                    <p style="font-weight:800;font-size:0.95rem;color:#5d534a;line-height:1.2;">Maylin Sic</p>
+                    <p style="font-weight:700;font-size:0.7rem;color:#76bc21;text-transform:uppercase;letter-spacing:0.08em;">Nutricionista &middot; Colegiada 5165</p>
+                  </div>
+                </div>
+                <div class="booking-live-badge">
+                  <span class="booking-live-dot"></span>
+                  Disponible ahora
+                </div>
+              </div>
+
+              <div class="booking-widget-wrap">
+                <div class="calendly-inline-widget" data-url="https://calendly.com/nutricionmsic/evento-de-prueba?hide_gdpr_banner=1&primary_color=ef7d00&background_color=fffcf9&text_color=5d534a"></div>
+                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- Modalidades -->
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-          <div
-            class="rounded-2xl bg-white dark:bg-slate-800 p-6 border border-orange-100 dark:border-slate-700 flex items-start gap-4 shadow-sm">
-            <span class="text-3xl">💻</span>
-            <div>
-              <h4 class="font-bold text-warm-gray dark:text-white mb-1">Virtual</h4>
-              <p class="text-sm text-warm-gray/60">Videollamada desde la comodidad de tu hogar.</p>
-            </div>
-          </div>
-          <div
-            class="rounded-2xl bg-white dark:bg-slate-800 p-6 border border-orange-100 dark:border-slate-700 flex items-start gap-4 shadow-sm">
-            <span class="text-3xl">🏥</span>
-            <div>
-              <h4 class="font-bold text-warm-gray dark:text-white mb-1">Clínica Zona 11</h4>
-              <p class="text-sm text-warm-gray/60">Atención presencial en Ciudad de Guatemala.</p>
-            </div>
-          </div>
-          <div
-            class="rounded-2xl bg-white dark:bg-slate-800 p-6 border border-orange-100 dark:border-slate-700 flex items-start gap-4 shadow-sm">
-            <span class="text-3xl">🚗</span>
-            <div>
-              <h4 class="font-bold text-warm-gray dark:text-white mb-1">A Domicilio</h4>
-              <p class="text-sm text-warm-gray/60">Casa u hospital. Consultar cobertura disponible.</p>
-            </div>
-          </div>
+        <div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <a href="https://calendly.com/nutricionmsic/evento-de-prueba" target="_blank" rel="noopener noreferrer"
+            class="inline-flex min-h-12 items-center gap-2 justify-center rounded-2xl bg-primary px-8 py-3 text-base font-bold text-white shadow-lg shadow-primary/20 transition-all hover:scale-[1.02]">
+            <span class="material-symbols-outlined text-base">open_in_new</span>
+            Abrir en pantalla completa
+          </a>
+          <a href="#contacto"
+            class="inline-flex min-h-12 items-center justify-center rounded-2xl border-2 border-primary/20 px-8 py-3 text-base font-bold text-primary transition-all hover:bg-primary/5">
+            ¿Necesitas ayuda?
+          </a>
         </div>
+        <p class="mx-auto mt-4 max-w-2xl text-center text-sm font-medium text-warm-gray/60">
+          ¿El calendario no carga? Abre el botón de arriba o <a href="https://wa.me/50235245292" target="_blank" class="text-primary hover:underline">escríbeme por WhatsApp</a>.
+        </p>
+
       </div>
     </section>
-
-    <script>
-    // ╔══════════════════════════════════════════════════════════════╗
-    // ║  HORARIOS — Edita aquí para actualizar el calendario       ║
-    // ║                                                            ║
-    // ║  Cada entrada tiene:                                       ║
-    // ║    dia:   "Lunes" | "Martes" | ... | "Sábado"              ║
-    // ║    tipo:  "presencial" o "virtual"                         ║
-    // ║    horas: lista de horas, ej. ["18:00", "19:00"]           ║
-    // ║                                                            ║
-    // ║  Para agregar un horario: copia una línea y cambia valores ║
-    // ║  Para quitar un horario: borra la línea                    ║
-    // ╚══════════════════════════════════════════════════════════════╝
-    const HORARIOS = [
-      { dia: "Lunes",     tipo: "presencial", horas: ["18:00", "19:00"] },
-      { dia: "Martes",    tipo: "virtual",    horas: ["17:30"] },
-      { dia: "Miércoles", tipo: "presencial", horas: ["18:00", "19:00"] },
-      { dia: "Jueves",    tipo: "virtual",    horas: ["17:30"] },
-      { dia: "Viernes",   tipo: "virtual",    horas: ["18:00", "19:00"] },
-      { dia: "Sábado",    tipo: "presencial", horas: ["7:00", "8:00", "11:00", "12:00"] },
-      { dia: "Sábado",    tipo: "virtual",    horas: ["16:00", "17:00"] },
-    ];
-    // ═══════════════ Fin de configuración ════════════════════════
-
-    (function renderCalendario() {
-      var DIAS = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-      var container = document.getElementById("calendario-container");
-
-      var grid = document.createElement("div");
-      grid.className = "grid grid-cols-3 md:grid-cols-6 gap-3";
-
-      DIAS.forEach(function (dia) {
-        var slots = HORARIOS.filter(function (h) { return h.dia === dia; });
-        var col = document.createElement("div");
-        col.className = "rounded-2xl bg-white dark:bg-slate-800 border border-orange-100 dark:border-slate-700 overflow-hidden shadow-sm";
-
-        var header = document.createElement("div");
-        header.className = "px-4 py-3 text-center font-bold text-sm text-warm-gray dark:text-white bg-orange-50/50 dark:bg-slate-700 border-b border-orange-100 dark:border-slate-600";
-        header.textContent = dia;
-        col.appendChild(header);
-
-        var body = document.createElement("div");
-        body.className = "p-3 flex flex-col gap-2 min-h-[120px]";
-
-        if (!slots.length) {
-          var empty = document.createElement("span");
-          empty.className = "text-xs text-warm-gray/30 text-center mt-4";
-          empty.textContent = "Sin horario";
-          body.appendChild(empty);
-        } else {
-          slots.forEach(function (slot) {
-            slot.horas.forEach(function (hora) {
-              var pill = document.createElement("div");
-              var isPresencial = slot.tipo === "presencial";
-              pill.className = "rounded-lg px-3 py-2 text-center text-xs font-bold transition-transform hover:scale-105 " +
-                (isPresencial
-                  ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
-                  : "bg-sky-50 text-sky-700 dark:bg-sky-900/30 dark:text-sky-300 border border-sky-200 dark:border-sky-800");
-              pill.innerHTML = (isPresencial ? "🏥 " : "💻 ") + hora;
-              body.appendChild(pill);
-            });
-          });
-        }
-
-        col.appendChild(body);
-        grid.appendChild(col);
-      });
-
-      container.appendChild(grid);
-    })();
-    </script>
 
     <!-- Productos -->
     <section class="py-24" id="productos">
@@ -878,7 +1012,7 @@
           <button
             class="product-card w-full cursor-pointer rounded-2xl bg-white dark:bg-slate-800 p-6 text-center border border-orange-100 dark:border-slate-700 hover:border-primary hover:-translate-y-1 transition-all shadow-sm"
             data-product-name="Marañón" data-product-price="65" type="button">
-            <div class="text-4xl mb-3">🌰</div>
+            <div class="text-4xl mb-3">🫘</div>
             <h4 class="font-bold text-sm text-warm-gray dark:text-white mb-1">Marañón</h4>
             <p class="text-xs text-warm-gray/50 mb-2">1 libra</p>
             <span class="text-xl font-bold text-accent-green">Q65</span>
@@ -886,7 +1020,7 @@
           <button
             class="product-card w-full cursor-pointer rounded-2xl bg-white dark:bg-slate-800 p-6 text-center border border-orange-100 dark:border-slate-700 hover:border-primary hover:-translate-y-1 transition-all shadow-sm"
             data-product-name="Almendras" data-product-price="60" type="button">
-            <div class="text-4xl mb-3">🫘</div>
+            <div class="text-4xl mb-3">🌰</div>
             <h4 class="font-bold text-sm text-warm-gray dark:text-white mb-1">Almendras</h4>
             <p class="text-xs text-warm-gray/50 mb-2">1 libra</p>
             <span class="text-xl font-bold text-accent-green">Q60</span>
@@ -894,7 +1028,7 @@
           <button
             class="product-card w-full cursor-pointer rounded-2xl bg-white dark:bg-slate-800 p-6 text-center border border-orange-100 dark:border-slate-700 hover:border-primary hover:-translate-y-1 transition-all shadow-sm"
             data-product-name="Macadamia" data-product-price="55" type="button">
-            <div class="text-4xl mb-3">🥜</div>
+            <div class="text-4xl mb-3">🥥</div>
             <h4 class="font-bold text-sm text-warm-gray dark:text-white mb-1">Macadamia</h4>
             <p class="text-xs text-warm-gray/50 mb-2">1 libra</p>
             <span class="text-xl font-bold text-accent-green">Q55</span>
@@ -944,7 +1078,8 @@
           </div>
           <div class="mt-6 grid gap-4 md:grid-cols-[1fr_auto] md:items-end">
             <div class="rounded-2xl bg-orange-50/60 p-5">
-              <p class="text-xs font-bold uppercase tracking-[0.2em] text-primary">Mensaje actual</p>
+              <p class="text-xs font-bold uppercase tracking-[0.2em] text-primary">Tu mensaje listo</p>
+              <p class="mt-1 text-xs font-medium text-warm-gray/50">Se arma solo según lo que elijas.</p>
               <p class="mt-3 whitespace-pre-line text-sm font-medium text-warm-gray/80" id="generated-message-preview">
                 Selecciona uno o más productos para generar el pedido automáticamente.</p>
             </div>
@@ -952,6 +1087,22 @@
               <p>Total estimado</p>
               <p class="mt-2 text-3xl text-accent-green" id="order-total">Q0</p>
             </div>
+          </div>
+
+          <!-- WhatsApp send button: hidden until products are selected -->
+          <div id="whatsapp-order-cta" style="display:none;" class="mt-5">
+            <a id="whatsapp-order-btn"
+              href="https://wa.me/50235245292"
+              target="_blank"
+              class="flex w-full items-center justify-center gap-3 rounded-2xl px-8 py-4 text-lg font-bold text-white transition-all hover:scale-[1.02] hover:shadow-2xl"
+              style="background: linear-gradient(135deg, #25D366, #128C7E); box-shadow: 0 8px 28px rgba(37,211,102,0.35);">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px;flex-shrink:0;">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                <path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.103 1.51 5.831L.057 23.999l6.335-1.662A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.371l-.359-.213-3.72.976.995-3.635-.234-.374A9.82 9.82 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z"/>
+              </svg>
+              Enviar pedido por WhatsApp
+            </a>
+            <p class="mt-2 text-center text-xs font-medium text-warm-gray/50">El mensaje con tu pedido ya viene incluido &mdash; solo confirma en WhatsApp.</p>
           </div>
         </div>
         <p class="mt-6 text-center text-sm text-warm-gray/60">
@@ -1087,62 +1238,58 @@
               </div>
             </div>
             <div class="w-full p-12 lg:w-3/5">
-              <h4 class="text-xl font-bold mb-8 text-warm-gray dark:text-white">📅 Solicitar cita</h4>
-              <form class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                <div class="flex flex-col gap-3">
-                  <label class="text-sm font-bold text-warm-gray dark:text-slate-300">Nombre completo</label>
-                  <input
-                    class="rounded-2xl border-orange-100 dark:border-slate-800 bg-orange-50/50 dark:bg-slate-800 px-6 py-4 focus:border-primary focus:ring-primary font-medium"
-                    placeholder="Tu nombre" type="text" />
+              <div class="rounded-[2rem] border border-orange-100 bg-orange-50/40 p-8 dark:border-slate-800 dark:bg-slate-800/60">
+                <div class="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-primary">
+                  <span class="material-symbols-outlined text-sm">calendar_month</span>
+                  Gestión de Citas
                 </div>
-                <div class="flex flex-col gap-3">
-                  <label class="text-sm font-bold text-warm-gray dark:text-slate-300">Teléfono / WhatsApp</label>
-                  <input
-                    class="rounded-2xl border-orange-100 dark:border-slate-800 bg-orange-50/50 dark:bg-slate-800 px-6 py-4 focus:border-primary focus:ring-primary font-medium"
-                    placeholder="+502 0000-0000" type="tel" />
+                <h4 class="mt-6 text-3xl font-bold text-warm-gray dark:text-white">Agendar nunca fue tan fácil</h4>
+                <p class="mt-4 text-base font-medium leading-relaxed text-warm-gray/70 dark:text-slate-300">
+                  Consulta cuándo estoy disponible, escoge tu horario y listo. Tu cita queda confirmada al instante, sin llamadas ni esperas.
+                </p>
+                <div class="mt-8 grid gap-4">
+                  <div class="rounded-2xl bg-white p-5 shadow-sm dark:bg-slate-900/80 flex gap-4 items-start">
+                    <span class="material-symbols-outlined text-primary mt-0.5 shrink-0">calendar_month</span>
+                    <div>
+                      <p class="text-base font-bold text-warm-gray dark:text-white">Horarios siempre actualizados</p>
+                      <p class="mt-1 text-sm font-medium text-warm-gray/70 dark:text-slate-400">Solo verás espacios realmente disponibles, sin cruces ni sorpresas.</p>
+                    </div>
+                  </div>
+                  <div class="rounded-2xl bg-white p-5 shadow-sm dark:bg-slate-900/80 flex gap-4 items-start">
+                    <span class="material-symbols-outlined text-primary mt-0.5 shrink-0">lock</span>
+                    <div>
+                      <p class="text-base font-bold text-warm-gray dark:text-white">Tu espacio queda reservado al instante</p>
+                      <p class="mt-1 text-sm font-medium text-warm-gray/70 dark:text-slate-400">Al confirmar, el horario se bloquea en mi agenda exclusivamente para ti.</p>
+                    </div>
+                  </div>
+                  <div class="rounded-2xl bg-white p-5 shadow-sm dark:bg-slate-900/80 flex gap-4 items-start">
+                    <span class="material-symbols-outlined text-primary mt-0.5 shrink-0">mail</span>
+                    <div>
+                      <p class="text-base font-bold text-warm-gray dark:text-white">Confirmación a tu correo</p>
+                      <p class="mt-1 text-sm font-medium text-warm-gray/70 dark:text-slate-400">Recibirás todos los detalles: fecha, lugar y enlace si es consulta virtual.</p>
+                    </div>
+                  </div>
                 </div>
-                <div class="flex flex-col gap-3 md:col-span-2">
-                  <label class="text-sm font-bold text-warm-gray dark:text-slate-300">Correo electrónico</label>
-                  <input
-                    class="rounded-2xl border-orange-100 dark:border-slate-800 bg-orange-50/50 dark:bg-slate-800 px-6 py-4 focus:border-primary focus:ring-primary font-medium"
-                    placeholder="tucorreo@email.com" type="email" />
+                <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+                  <a href="#horarios"
+                    class="inline-flex min-h-14 items-center justify-center rounded-2xl bg-primary px-8 py-4 text-lg font-bold text-white shadow-xl shadow-primary/20 transition-all hover:scale-[1.02]">
+                    Quiero agendar mi cita
+                  </a>
+                  <a href="https://calendly.com/nutricionmsic/evento-de-prueba" target="_blank" rel="noopener noreferrer"
+                    class="inline-flex min-h-14 items-center justify-center rounded-2xl border-2 border-primary/20 px-8 py-4 text-lg font-bold text-primary transition-all hover:bg-primary/5">
+                    Abrir calendario externo
+                  </a>
                 </div>
-                <div class="flex flex-col gap-3">
-                  <label class="text-sm font-bold text-warm-gray dark:text-slate-300">Tipo de consulta</label>
-                  <select
-                    class="rounded-2xl border-orange-100 dark:border-slate-800 bg-orange-50/50 dark:bg-slate-800 px-6 py-4 focus:border-primary focus:ring-primary font-bold">
-                    <option value="">Seleccionar...</option>
-                    <option>Primera consulta</option>
-                    <option>Reconsulta</option>
-                    <option>Consulta familiar</option>
-                    <option>Lactancia pre/post parto</option>
-                  </select>
+                <div class="mt-6 rounded-2xl border border-dashed border-orange-200 bg-white/80 p-5 dark:border-slate-700 dark:bg-slate-900/70 flex gap-4 items-center">
+                  <span class="text-2xl shrink-0">💬</span>
+                  <div>
+                    <p class="text-sm font-bold text-warm-gray dark:text-white">¿Tienes dudas antes de reservar?</p>
+                    <p class="mt-1 text-sm font-medium leading-relaxed text-warm-gray/70 dark:text-slate-400">
+                      Con gusto te oriento por <a href="https://wa.me/50235245292" target="_blank" class="text-primary font-bold hover:underline">WhatsApp</a>.
+                    </p>
+                  </div>
                 </div>
-                <div class="flex flex-col gap-3">
-                  <label class="text-sm font-bold text-warm-gray dark:text-slate-300">Modalidad</label>
-                  <select
-                    class="rounded-2xl border-orange-100 dark:border-slate-800 bg-orange-50/50 dark:bg-slate-800 px-6 py-4 focus:border-primary focus:ring-primary font-bold">
-                    <option value="">Seleccionar...</option>
-                    <option>Presencial – Zona 11</option>
-                    <option>Virtual</option>
-                    <option>A domicilio</option>
-                  </select>
-                </div>
-                <div class="flex flex-col gap-3 md:col-span-2">
-                  <label class="text-sm font-bold text-warm-gray dark:text-slate-300">Mensaje (opcional)</label>
-                  <textarea
-                    class="rounded-2xl border-orange-100 dark:border-slate-800 bg-orange-50/50 dark:bg-slate-800 px-6 py-4 focus:border-primary focus:ring-primary font-medium"
-                    id="message-field" placeholder="Cuéntame brevemente sobre lo que buscas..." rows="6"></textarea>
-                </div>
-                <div class="md:col-span-2">
-                  <p class="text-xs font-medium text-warm-gray/50">La selección de productos y tarifas se agregará aquí
-                    automáticamente cuando marques una o más opciones.</p>
-                </div>
-                <button
-                  class="rounded-2xl bg-primary px-10 py-5 text-lg font-bold text-white shadow-xl shadow-primary/20 hover:scale-[1.02] md:col-span-2 transition-all">
-                  Enviar solicitud 🌿
-                </button>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -1177,35 +1324,24 @@
   </div>
 
   <!-- WhatsApp flotante -->
-  <a class="wa-float" href="https://wa.me/502" id="whatsapp-link" target="_blank" title="Contáctame por WhatsApp">
+  <a class="wa-float" href="https://wa.me/50235245292" id="whatsapp-link" target="_blank" title="Contáctame por WhatsApp">
     💬
   </a>
 
   <script>
     const productCards = Array.from(document.querySelectorAll(".product-card"));
-    const serviceCards = Array.from(document.querySelectorAll(".service-card"));
     const orderSummary = document.getElementById("order-summary");
-    const serviceSummary = document.getElementById("service-summary");
     const orderTotal = document.getElementById("order-total");
-    const serviceTotal = document.getElementById("service-total");
     const generatedMessagePreview = document.getElementById("generated-message-preview");
-    const pricingMessagePreview = document.getElementById("pricing-message-preview");
     const messageField = document.getElementById("message-field");
     const clearOrderButton = document.getElementById("clear-order-button");
-    const clearServiceButton = document.getElementById("clear-service-button");
     const whatsappLink = document.getElementById("whatsapp-link");
     const baseWhatsappUrl = whatsappLink.getAttribute("href") || "https://wa.me/";
-    const emptyPreviewMessage = "Selecciona productos o tarifas para generar el mensaje automáticamente.";
+    const emptyPreviewMessage = "Selecciona uno o más productos para que el pedido se genere automáticamente.";
     const selectedProducts = new Map();
-    const selectedServices = new Map();
-    const messagePreviews = [generatedMessagePreview, pricingMessagePreview].filter(Boolean);
 
     function formatPounds(quantity) {
       return quantity === 1 ? "1 libra" : quantity + " libras";
-    }
-
-    function formatAppointments(quantity) {
-      return quantity === 1 ? "1 cita" : quantity + " citas";
     }
 
     function updateOrderSummary(items) {
@@ -1220,23 +1356,6 @@
           '<button aria-label="Quitar una libra de ' + item.name + '" data-action="decrease" data-product-name="' + item.name + '" type="button">−</button>' +
           '<span>' + item.quantity + ' lb · ' + item.name + '</span>' +
           '<button aria-label="Agregar otra libra de ' + item.name + '" data-action="increase" data-product-name="' + item.name + '" type="button">+</button>' +
-          "</div>"
-        );
-      }).join("");
-    }
-
-    function updateServiceSummary(items) {
-      if (!items.length) {
-        serviceSummary.innerHTML = '<span class="text-sm font-medium text-warm-gray/50">Todavía no has agregado tarifas.</span>';
-        return;
-      }
-
-      serviceSummary.innerHTML = items.map(function (item) {
-        return (
-          '<div class="order-chip">' +
-          '<button aria-label="Quitar una cita de ' + item.name + '" data-action="decrease" data-service-name="' + item.name + '" type="button">−</button>' +
-          '<span>' + item.quantity + ' cita' + (item.quantity > 1 ? 's' : '') + ' · ' + item.name + '</span>' +
-          '<button aria-label="Agregar otra cita de ' + item.name + '" data-action="increase" data-service-name="' + item.name + '" type="button">+</button>' +
           "</div>"
         );
       }).join("");
@@ -1263,27 +1382,6 @@
       });
     }
 
-    function updateServiceCards() {
-      serviceCards.forEach(function (card) {
-        const serviceName = card.dataset.serviceName;
-        const quantity = selectedServices.get(serviceName) || 0;
-        card.classList.toggle("is-selected", quantity > 0);
-        card.setAttribute("aria-pressed", quantity > 0 ? "true" : "false");
-
-        const existingBadge = card.querySelector(".selection-badge");
-        if (existingBadge) {
-          existingBadge.remove();
-        }
-
-        if (quantity > 0) {
-          const badge = document.createElement("span");
-          badge.className = "selection-badge";
-          badge.textContent = quantity + " cita" + (quantity > 1 ? "s" : "");
-          card.appendChild(badge);
-        }
-      });
-    }
-
     function getSelectedProductItems() {
       return productCards
         .map(function (card) {
@@ -1297,72 +1395,65 @@
         });
     }
 
-    function getSelectedServiceItems() {
-      return serviceCards
-        .map(function (card) {
-          const name = card.dataset.serviceName;
-          const price = Number(card.dataset.servicePrice);
-          const quantity = selectedServices.get(name) || 0;
-          return { name: name, price: price, quantity: quantity };
-        })
-        .filter(function (item) {
-          return item.quantity > 0;
-        });
-    }
-
-    function buildMessage(serviceItems, productItems) {
-      if (!serviceItems.length && !productItems.length) {
+    function buildMessage(productItems) {
+      if (!productItems.length) {
         return "";
       }
 
       const sections = [];
 
-      if (serviceItems.length) {
-        const serviceLines = serviceItems.map(function (item) {
-          return "- " + formatAppointments(item.quantity) + " de " + item.name.toLowerCase();
-        });
-        sections.push("Consultas:\n" + serviceLines.join("\n"));
-      }
-
       if (productItems.length) {
         const productLines = productItems.map(function (item) {
-          return "- " + formatPounds(item.quantity) + " de " + item.name.toLowerCase();
+          return "- " + formatPounds(item.quantity) + " de " + item.name;
         });
         sections.push("Productos:\n" + productLines.join("\n"));
       }
 
       return [
-        "Hola, me gustaría solicitar:",
+        "Hola Maylin, me gustaría pedir los siguientes productos:",
         "",
         sections.join("\n\n"),
         "",
-        "¿Me compartes disponibilidad, por favor?"
+        "¿Cuáles son las facilidades de pago y de envío o entrega por favor?"
       ].join("\n");
     }
 
     function syncSelectionsUi() {
       const productItems = getSelectedProductItems();
-      const serviceItems = getSelectedServiceItems();
 
       const productTotal = productItems.reduce(function (sum, item) {
         return sum + item.price * item.quantity;
       }, 0);
-      const selectedServiceTotal = serviceItems.reduce(function (sum, item) {
-        return sum + item.price * item.quantity;
-      }, 0);
-      const message = buildMessage(serviceItems, productItems);
+      
+      const message = buildMessage(productItems);
+      const hasItems = productItems.length > 0;
 
       updateProductCards();
-      updateServiceCards();
       updateOrderSummary(productItems);
-      updateServiceSummary(serviceItems);
+      
       orderTotal.textContent = "Q" + productTotal;
-      serviceTotal.textContent = "Q" + selectedServiceTotal;
-      messagePreviews.forEach(function (preview) {
-        preview.textContent = message || emptyPreviewMessage;
-      });
-      messageField.value = message;
-      whatsappLink.href = message ? baseWhatsappUrl + "?text=" + encodeURIComponent(message) : baseWhatsappUrl;
+      
+      if(generatedMessagePreview) {
+        generatedMessagePreview.textContent = message || emptyPreviewMessage;
+      }
+      if (messageField) {
+        messageField.value = message;
+      }
+
+      // Update floating WA button
+      if(whatsappLink) {
+        whatsappLink.href = message ? baseWhatsappUrl + "?text=" + encodeURIComponent(message) : baseWhatsappUrl;
+      }
+
+      // Show / hide the inline WA CTA
+      var orderCta = document.getElementById("whatsapp-order-cta");
+      var orderBtn = document.getElementById("whatsapp-order-btn");
+      if (orderCta) {
+        orderCta.style.display = hasItems ? "block" : "none";
+      }
+      if (orderBtn && message) {
+        orderBtn.href = baseWhatsappUrl + "?text=" + encodeURIComponent(message);
+      }
     }
 
     productCards.forEach(function (card) {
@@ -1370,15 +1461,6 @@
         const productName = card.dataset.productName;
         const currentQuantity = selectedProducts.get(productName) || 0;
         selectedProducts.set(productName, currentQuantity + 1);
-        syncSelectionsUi();
-      });
-    });
-
-    serviceCards.forEach(function (card) {
-      card.addEventListener("click", function () {
-        const serviceName = card.dataset.serviceName;
-        const currentQuantity = selectedServices.get(serviceName) || 0;
-        selectedServices.set(serviceName, currentQuantity + 1);
         syncSelectionsUi();
       });
     });
@@ -1408,40 +1490,12 @@
       syncSelectionsUi();
     });
 
-    serviceSummary.addEventListener("click", function (event) {
-      const button = event.target.closest("button[data-action]");
-      if (!button) {
-        return;
-      }
-
-      const serviceName = button.dataset.serviceName;
-      const currentQuantity = selectedServices.get(serviceName) || 0;
-
-      if (button.dataset.action === "increase") {
-        selectedServices.set(serviceName, currentQuantity + 1);
-      }
-
-      if (button.dataset.action === "decrease") {
-        const nextQuantity = currentQuantity - 1;
-        if (nextQuantity > 0) {
-          selectedServices.set(serviceName, nextQuantity);
-        } else {
-          selectedServices.delete(serviceName);
-        }
-      }
-
-      syncSelectionsUi();
-    });
-
-    clearOrderButton.addEventListener("click", function () {
-      selectedProducts.clear();
-      syncSelectionsUi();
-    });
-
-    clearServiceButton.addEventListener("click", function () {
-      selectedServices.clear();
-      syncSelectionsUi();
-    });
+    if(clearOrderButton) {
+      clearOrderButton.addEventListener("click", function () {
+        selectedProducts.clear();
+        syncSelectionsUi();
+      });
+    }
 
     syncSelectionsUi();
   </script>
